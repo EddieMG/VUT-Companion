@@ -23,5 +23,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         },SPLASH_TIME_OUT);
+        //comentari
     }
 }
