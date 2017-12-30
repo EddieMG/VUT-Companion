@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.upc.eseiaat.pma.vutcompanion.HomeActivity">
+
+    <Button
+        android:id="@+id/myAccountButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="gotoTest"
+        android:text="Test"
+        android:textColor="@color/colorText"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/TestButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/myAccountButton"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="gotoMyAccount"
+        android:text="My Account"
+        android:textColor="@color/colorText"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/ResultsButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_alignStart="@+id/myAccountButton"
+        android:layout_below="@+id/myAccountButton"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="gotoResults"
+        android:text="Results"
+        android:textColor="@color/colorText"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/AdminButton"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/TestButton"
+        android:layout_marginEnd="43dp"
+        android:layout_toEndOf="@+id/ResultsButton"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="gotoAdmin"
+        android:text="Admin"
+        android:textColor="@color/colorText"
+        android:textSize="17sp" />
+
+</android.widget.RelativeLayout>

@@ -1,4 +1,4 @@
-package edu.upc.eseiaat.pma.vutcompanion;
+package edu.upc.eseiaat.pma;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

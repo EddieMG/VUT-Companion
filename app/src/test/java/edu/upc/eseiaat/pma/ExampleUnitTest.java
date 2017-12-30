@@ -1,4 +1,4 @@
-package edu.upc.eseiaat.pma.vutcompanion;
+package edu.upc.eseiaat.pma;
 
 import org.junit.Test;
 
