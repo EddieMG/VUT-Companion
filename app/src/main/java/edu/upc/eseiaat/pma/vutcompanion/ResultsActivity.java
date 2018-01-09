@@ -1,3 +1,4 @@
+
 package edu.upc.eseiaat.pma.vutcompanion;
 
 import android.support.v7.app.AppCompatActivity;
@@ -19,3 +20,4 @@ public class ResultsActivity extends AppCompatActivity {
         title.setText(text);
     }
 }
+

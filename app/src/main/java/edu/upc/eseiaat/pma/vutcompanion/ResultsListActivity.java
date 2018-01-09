@@ -1,77 +1,181 @@
 package edu.upc.eseiaat.pma.vutcompanion;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import junit.framework.Assert;
+
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.provider.Telephony.Mms.Part.FILENAME;
 
 public class ResultsListActivity extends AppCompatActivity {
-
-    private ArrayList<String> resultList;
-    private ArrayAdapter<String> adapter;
+    ArrayList<HashMap<String,String>>data;
+    private String[] titleArray,subItemArray;
     private ListView list;
+    private Button btn_add;
+    private EditText edit_item;
+    private SimpleAdapter adapter;
+    //  private HashMap<String,String> datum;
+    private AlertDialog.Builder alert;
+    private Integer PreuTotal;
+    private TextView Total;
+    public int  contador = 0;
+    private static final int MAX_BYTES = 8000;
+    private static final  String FILENAME = "shoppinglist.txt";
     public static String  TextKey = "TextKey";
+    private void writeItemList(){
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            for (int i = 0; i < contador; i++) {
+
+                HashMap<String, String> hash = data.get(i);
+                String title = hash.get("title");
+                String preu = hash.get("preu");
+
+                String line = String.format("%s;%s\n", title, preu);
+                fos.write(line.getBytes());
+                //s.writeChar('l');
+            }
+
+            fos.close(); // ... and close.
+            fos.close();
+
+        } catch (FileNotFoundException e) {
+            Log.e("Eddie", "writeItemList: FileNotFoundException");
+        } catch (IOException e) {
+            Log.e("Eddie", "writeItemList: IOException ");
+        }
+    }
+
+
+    private  void readItemList() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            byte[] buffer = new byte[MAX_BYTES];
+            int nread = fis.read(buffer);
+            if (nread > 0) {
+                String content = new String(buffer, 0, nread);
+                String[] lines = content.split("\n");
+                for (String line : lines) {
+                    String[] parts = line.split(";");
+                    String title = parts[0];
+                    String preu = parts[1];
+                    if (parts[1].isEmpty()){
+                        return;
+                    }
+                    String[] preu_partit = parts[1].split(" ");
+                    String valor_preu = preu_partit[0];
+
+                    HashMap<String, String> datum2 = new HashMap<String, String>();
+                    datum2.put("title", title);
+                    datum2.put("preu", preu);
+
+                    if (!title.isEmpty()) {
+                        Log.e("Eddie", "datum");
+                        data.add(datum2);
+                        adapter.notifyDataSetChanged();
+                        contador++;
+                    }
+                }
+            }
+            fis.close();
+        } catch (FileNotFoundException e) {
+            Log.i("edd", "readItemList: FileNotFoundException");
+        } catch (IOException e) {
+            Log.e("edd", "readItemList: IOException");
+        }
+
+        // Assert.assertEquals(data.hashCode(), data.hashCode());
+        //  Assert.assertEquals(data.toString(), data.toString());
+        //  Assert.assertTrue(data.equals(data));
+    }
+
+    @Override
+    public void onStop() {
+
+        super.onStop();
+
+        writeItemList();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_list);
 
-        list = (ListView) findViewById(R.id.list);
 
-        resultList = new ArrayList<>();
-        resultList.add("Test 0          6/09/1996");
-        resultList.add("Test 1          17/09/1996");
-        resultList.add("Test 2          22/09/2017");
-        resultList.add("Test 3          30/10/2017");
-        resultList.add("Test 4          11/11/2017");
-        resultList.add("Test 5          12/11/2017");
-        resultList.add("Test 6          8/12/2017");
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resultList);
+       list = (ListView)findViewById(R.id.list1);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+        data = new ArrayList<HashMap<String,String>>();
 
-                Intent intent = new Intent(ResultsListActivity.this, ResultsActivity.class);
-                intent.putExtra(TextKey, resultList.get(pos));
-                startActivity(intent);
-            }
-        });
+
+
+
+        adapter= new SimpleAdapter(this,data,android.R.layout.simple_list_item_2,new String[]{"title","preu"},new int[]{android.R.id.text1,android.R.id.text2});
+        list.setAdapter(adapter);
+        readItemList();
 
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> list, View item, int pos, long id) {
+            public boolean onItemLongClick(AdapterView<?> list, View view, int pos, long id) {
                 maybeRemoveItem(pos);
                 return true;
             }
         });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                HashMap<String, String> hash = data.get(pos);
+                String preu = hash.get("preu");
+                String titol = hash.get("title");
+                Intent intent = new Intent(ResultsListActivity.this, ResultsActivity.class);
+                intent.putExtra(TextKey,preu+" "+titol);
+                startActivity(intent);
+            }
+        });}
 
-        list.setAdapter(adapter);
-    }
+
+
 
     private void maybeRemoveItem(final int pos) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.confirm);
-        builder.setMessage(String.format("Are you sure you want to remove '%s'?", resultList.get(pos)));
-        builder.setPositiveButton(R.string.erease, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                resultList.remove(pos);
-                adapter.notifyDataSetChanged();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, null);
-        builder.create().show();
+
+        data.remove(pos);
+        adapter.notifyDataSetChanged();
+
     }
+
+
 }
+
