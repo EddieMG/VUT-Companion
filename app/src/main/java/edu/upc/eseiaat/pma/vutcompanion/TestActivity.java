@@ -7,20 +7,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TestActivity extends AppCompatActivity {
     private AlertDialog.Builder alert;
@@ -39,7 +30,6 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         popup();
-
     }
 
     private void popup() {
@@ -51,7 +41,6 @@ public class TestActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         layoutParams.setMargins(100, 0, 100, 0);
-
 
         final TextView text1=new TextView(context);
         final EditText editText1 = new EditText(context);
@@ -65,7 +54,6 @@ public class TestActivity extends AppCompatActivity {
 
         layout.addView(editText,layoutParams);
 
-
         editText1.setHint("Data");
         editText1.setInputType(InputType.TYPE_CLASS_DATETIME);
         layout.addView(text2,layoutParams);
@@ -77,7 +65,6 @@ public class TestActivity extends AppCompatActivity {
 
                 Nom = editText.getText().toString();
                 Data = editText1.getText().toString();
-
             }
         });
 

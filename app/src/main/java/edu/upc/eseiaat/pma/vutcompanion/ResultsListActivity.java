@@ -1,56 +1,26 @@
 package edu.upc.eseiaat.pma.vutcompanion;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewDebug;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
-import junit.framework.Assert;
-
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.provider.Telephony.Mms.Part.FILENAME;
 
 public class ResultsListActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>>data;
-    private String[] titleArray,subItemArray;
     private ListView list;
-    private Button btn_add;
-    private EditText edit_item;
     private SimpleAdapter adapter;
-    //  private HashMap<String,String> datum;
-    private AlertDialog.Builder alert;
-    private Integer PreuTotal;
-    private TextView Total;
     public int  contador = 0;
     private static final int MAX_BYTES = 8000;
     private static final  String FILENAME = "shoppinglist.txt";
@@ -70,7 +40,7 @@ public class ResultsListActivity extends AppCompatActivity {
 
                 String line = String.format("%s;%s\n", title, preu);
                 fos.write(line.getBytes());
-                //s.writeChar('l');
+
             }
 
             fos.close(); // ... and close.
@@ -125,9 +95,7 @@ public class ResultsListActivity extends AppCompatActivity {
             Log.e("edd", "readItemList: IOException");
         }
 
-        // Assert.assertEquals(data.hashCode(), data.hashCode());
-        //  Assert.assertEquals(data.toString(), data.toString());
-        //  Assert.assertTrue(data.equals(data));
+
     }
 
     @Override
