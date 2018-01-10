@@ -3,6 +3,7 @@ package edu.upc.eseiaat.pma.vutcompanion;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,11 @@ public class ResultsListActivity extends AppCompatActivity {
     private static final int MAX_BYTES = 8000;
     private static final  String FILENAME = "shoppinglist.txt";
     public static String  TextKey = "TextKey";
-    private void writeItemList(){
+    public static String  TextKey2 = "TextKey2";
+    private String Data;
+    private String Nom;
+
+    private void writeItemList() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             for (int i = 0; i < contador; i++) {
@@ -75,8 +80,12 @@ public class ResultsListActivity extends AppCompatActivity {
             Log.e("Eddie", "writeItemList: FileNotFoundException");
         } catch (IOException e) {
             Log.e("Eddie", "writeItemList: IOException ");
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.e("Eddie", "IndexOutOfBoundsException ");
         }
     }
+
 
 
     private  void readItemList() {
@@ -134,8 +143,8 @@ public class ResultsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_list);
 
-
-
+        Data=getIntent().getExtras().getString(ResultsListActivity.TextKey);
+        Nom=getIntent().getExtras().getString(ResultsListActivity.TextKey2);
        list = (ListView)findViewById(R.id.list1);
 
         data = new ArrayList<HashMap<String,String>>();
@@ -146,7 +155,11 @@ public class ResultsListActivity extends AppCompatActivity {
         adapter= new SimpleAdapter(this,data,android.R.layout.simple_list_item_2,new String[]{"title","preu"},new int[]{android.R.id.text1,android.R.id.text2});
         list.setAdapter(adapter);
         readItemList();
-
+        HashMap<String,String> datum2 = new HashMap<String, String>();
+        datum2.put("title",Nom);
+        datum2.put("preu",Data);
+        data.add(datum2);
+        adapter.notifyDataSetChanged();
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> list, View view, int pos, long id) {

@@ -32,12 +32,14 @@
             android:textSize="17sp" />
 
         <ImageButton
+            android:id="@+id/save_btn1"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/addButton"
+            android:onClick="GoToResults"
             app:srcCompat="@android:drawable/ic_menu_save"
             tools:background="@color/colorPrimary" />
     </RelativeLayout>
