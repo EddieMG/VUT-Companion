@@ -6,30 +6,29 @@
     android:layout_height="match_parent"
     tools:context="edu.upc.eseiaat.pma.vutcompanion.ResultsActivity">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="60dp" />
-
-    <TextView
-        android:id="@+id/resultTitle"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/graph1"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="Experiment nº1"
-        android:textSize="30sp" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout">
 
-    <Spinner
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/resultTitle"
-        android:layout_alignEnd="@+id/graph1"
-        android:layout_alignBottom="@+id/resultTitle"></Spinner>
+        <TextView
+            android:id="@+id/resultTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:text="Experiment nº1"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/resultsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout" />
 
 </android.widget.RelativeLayout>

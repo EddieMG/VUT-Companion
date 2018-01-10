@@ -26,8 +26,10 @@ public class ResultsListActivity extends AppCompatActivity {
     private static final  String FILENAME = "shoppinglist.txt";
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
+    public static String  Num_Graph = "NumberOfGraphics";
     private String Data;
     private String Nom;
+    private int num_graph;
 
     private void writeItemList() {
         try {
@@ -36,15 +38,14 @@ public class ResultsListActivity extends AppCompatActivity {
 
                 HashMap<String, String> hash = data.get(i);
                 String title = hash.get("title");
-                String preu = hash.get("preu");
+                String date = hash.get("date");
 
-                String line = String.format("%s;%s\n", title, preu);
+                String line = String.format("%s;%s\n", title, date);
                 fos.write(line.getBytes());
 
             }
 
-            fos.close(); // ... and close.
-            fos.close();
+            fos.close(); // ... and close
 
         } catch (FileNotFoundException e) {
             Log.e("Eddie", "writeItemList: FileNotFoundException");
@@ -69,7 +70,7 @@ public class ResultsListActivity extends AppCompatActivity {
                 for (String line : lines) {
                     String[] parts = line.split(";");
                     String title = parts[0];
-                    String preu = parts[1];
+                    String date = parts[1];
                     if (parts[1].isEmpty()){
                         return;
                     }
@@ -78,7 +79,7 @@ public class ResultsListActivity extends AppCompatActivity {
 
                     HashMap<String, String> datum2 = new HashMap<String, String>();
                     datum2.put("title", title);
-                    datum2.put("preu", preu);
+                    datum2.put("date", date);
 
                     if (!title.isEmpty()) {
                         Log.e("Eddie", "datum");
@@ -94,8 +95,6 @@ public class ResultsListActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("edd", "readItemList: IOException");
         }
-
-
     }
 
     @Override
@@ -111,21 +110,19 @@ public class ResultsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_list);
 
-        Data=getIntent().getExtras().getString(ResultsListActivity.TextKey);
-        Nom=getIntent().getExtras().getString(ResultsListActivity.TextKey2);
-       list = (ListView)findViewById(R.id.list1);
+        Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
+        Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
+        num_graph = getIntent().getExtras().getInt(ResultsListActivity.Num_Graph);
+        list = (ListView)findViewById(R.id.list1);
 
         data = new ArrayList<HashMap<String,String>>();
 
-
-
-
-        adapter= new SimpleAdapter(this,data,android.R.layout.simple_list_item_2,new String[]{"title","preu"},new int[]{android.R.id.text1,android.R.id.text2});
+        adapter= new SimpleAdapter(this,data,android.R.layout.simple_list_item_2,new String[]{"title","date"},new int[]{android.R.id.text1,android.R.id.text2});
         list.setAdapter(adapter);
         readItemList();
         HashMap<String,String> datum2 = new HashMap<String, String>();
         datum2.put("title",Nom);
-        datum2.put("preu",Data);
+        datum2.put("date",Data);
         data.add(datum2);
         adapter.notifyDataSetChanged();
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -139,10 +136,11 @@ public class ResultsListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
                 HashMap<String, String> hash = data.get(pos);
-                String preu = hash.get("preu");
-                String titol = hash.get("title");
+                String date = hash.get("date");
+                String title = hash.get("title");
                 Intent intent = new Intent(ResultsListActivity.this, ResultsActivity.class);
-                intent.putExtra(TextKey,preu+" "+titol);
+                intent.putExtra(TextKey,title + " " + date);
+                intent.putExtra(Num_Graph,num_graph);
                 startActivity(intent);
             }
         });}

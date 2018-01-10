@@ -29,4 +29,11 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="confirm">Confirm</string>
     <string name="erease">Erease</string>
+
+    <string-array name="options">
+        <item>Thrust</item>
+        <item>Presure</item>
+        <item>Temperature</item>
+        <item>Wind</item>
+    </string-array>
 </resources>

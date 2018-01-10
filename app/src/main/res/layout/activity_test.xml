@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context="edu.upc.eseiaat.pma.vutcompanion.TestActivity">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graphView3"
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="60dp" />
-
     <RelativeLayout
         android:id="@+id/editBox"
         android:layout_width="match_parent"
@@ -51,5 +43,14 @@
             app:srcCompat="@android:drawable/ic_menu_save"
             tools:background="@color/colorPrimary" />
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview_spinner"
+        style="@style/Widget.AppCompat.ListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editBox"
+        android:layout_alignParentTop="true"
+        android:stackFromBottom="false"></ListView>
 
 </android.widget.RelativeLayout>

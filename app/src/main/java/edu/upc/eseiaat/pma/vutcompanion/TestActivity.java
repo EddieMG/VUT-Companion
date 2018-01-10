@@ -8,17 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class TestActivity extends AppCompatActivity {
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
-    public static String Nom;
-    public static String Data;
+    public static String  Num_Graph = "NumberOfGraphics";
+    public static String  Nom;
+    public static String  Data;
+
+    private ListView lvSpinner;
+    private Button addPlot;
+    private int num_graphs = 1;
 
     @Override
     public void onStop() {
@@ -29,7 +38,10 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        showGraphsList();
         popup();
+
     }
 
     private void popup() {
@@ -75,6 +87,28 @@ public class TestActivity extends AppCompatActivity {
         });
 
         alert.show();
+    }
+
+    private void showGraphsList() {
+        lvSpinner = (ListView) findViewById(R.id.listview_spinner);
+        addPlot = (Button) findViewById(R.id.addButton);
+
+        final ArrayList<String> mData = new ArrayList<>();
+        mData.add("Test1");
+        ArrayList<String> mSpinnerData = new ArrayList<>();
+        final GraphSpinnerAdapter adapter = new GraphSpinnerAdapter(mData, mSpinnerData, this);
+
+        addPlot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mData.add("new");
+                adapter.notifyDataSetChanged();
+                lvSpinner.smoothScrollToPosition(mData.size()-1);
+                num_graphs++;
+            }
+        });
+
+        lvSpinner.setAdapter(adapter);
 
     }
 
@@ -82,6 +116,7 @@ public class TestActivity extends AppCompatActivity {
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
+        intent.putExtra(Num_Graph,num_graphs);
         startActivity(intent);
     }
 }
