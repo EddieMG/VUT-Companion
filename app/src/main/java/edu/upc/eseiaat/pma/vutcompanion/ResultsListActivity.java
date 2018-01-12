@@ -21,7 +21,7 @@ public class ResultsListActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>>data;
     private ListView list;
     private SimpleAdapter adapter;
-    public int  contador = 0;
+    public int  contador = 1;
     private static final int MAX_BYTES = 8000;
     private static final  String FILENAME = "shoppinglist.txt";
     public static String  TextKey = "TextKey";
@@ -30,9 +30,10 @@ public class ResultsListActivity extends AppCompatActivity {
     private String Data;
     private String Nom;
     private int num_graph;
-
+    private boolean gotExtra;
     private void writeItemList() {
         try {
+            Log.e("eddie","escriptura11");
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             for (int i = 0; i < contador; i++) {
 
@@ -42,7 +43,7 @@ public class ResultsListActivity extends AppCompatActivity {
 
                 String line = String.format("%s;%s\n", title, date);
                 fos.write(line.getBytes());
-
+                Log.e("eddie","escriptura");
             }
 
             fos.close(); // ... and close
@@ -109,10 +110,12 @@ public class ResultsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_list);
-
-        Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
-        Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
-        num_graph = getIntent().getExtras().getInt(ResultsListActivity.Num_Graph);
+        try {
+            Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
+            Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
+            num_graph = getIntent().getExtras().getInt(ResultsListActivity.Num_Graph);
+            gotExtra=true;
+        }catch (NullPointerException e){gotExtra=false;}
         list = (ListView)findViewById(R.id.list1);
 
         data = new ArrayList<HashMap<String,String>>();
@@ -120,11 +123,16 @@ public class ResultsListActivity extends AppCompatActivity {
         adapter= new SimpleAdapter(this,data,android.R.layout.simple_list_item_2,new String[]{"title","date"},new int[]{android.R.id.text1,android.R.id.text2});
         list.setAdapter(adapter);
         readItemList();
-        HashMap<String,String> datum2 = new HashMap<String, String>();
-        datum2.put("title",Nom);
-        datum2.put("date",Data);
-        data.add(datum2);
-        adapter.notifyDataSetChanged();
+        if (gotExtra){
+            Log.e("eddie","bullshite");
+            HashMap<String, String> datum2 = new HashMap<String, String>();
+            datum2.put("title", Nom);
+            datum2.put("date", Data);
+            data.add(datum2);
+            adapter.notifyDataSetChanged();
+            writeItemList();
+        }
+
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> list, View view, int pos, long id) {
