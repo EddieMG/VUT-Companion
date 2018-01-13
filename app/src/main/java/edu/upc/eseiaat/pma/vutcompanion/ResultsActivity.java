@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -22,10 +24,13 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
 
         TextView title = (TextView) findViewById(R.id.resultTitle);
+        TextView date = (TextView) findViewById(R.id.dateTextView);
 
         String text = getIntent().getExtras().getString(ResultsListActivity.TextKey);
+        String dateRecived = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
         num_graph = getIntent().getExtras().getInt(ResultsListActivity.Num_Graph);
         title.setText(text);
+        date.setText(dateRecived);
 
         list = (ListView) findViewById(R.id.resultsList);
         final ArrayList<String> mData = new ArrayList<>();

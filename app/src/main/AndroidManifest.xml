@@ -26,19 +26,43 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".EliminateAccountActivity" />
-        <activity android:name=".AcceptAccountActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".MyAccountActivity" />
-        <activity android:name=".ResultsListActivity" />
-        <activity android:name=".ResultsActivity" />
-        <activity android:name=".TestActivity" />
+        <activity android:name=".AdminActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".EliminateAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".AcceptAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".HomeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".MyAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ResultsListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ResultsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".TestActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".NavDrawerHomeActivity"
+            android:label="@string/title_activity_nav_drawer_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerTestActivity"
+            android:label="@string/title_activity_nav_drawer_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerResultsListActivity"
+            android:label="@string/title_activity_nav_drawer_results_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerMyAccountActivity"
+            android:label="@string/title_activity_nav_drawer_my_account"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerAdminActivity"
+            android:label="@string/title_activity_nav_drawer_admin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -36,4 +36,9 @@
         <item>Temperature</item>
         <item>Wind</item>
     </string-array>
+    <string name="title_activity_nav_drawer_home">NavDrawerHomeActivity</string>
+    <string name="title_activity_nav_drawer_test">NavDrawerTestActivity</string>
+    <string name="title_activity_nav_drawer_results_list">NavDrawerResultsListActivity</string>
+    <string name="title_activity_nav_drawer_my_account">NavDrawerMyAccountActivity</string>
+    <string name="title_activity_nav_drawer_admin">NavDrawerAdminActivity</string>
 </resources>

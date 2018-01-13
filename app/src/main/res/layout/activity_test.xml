@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/editBox"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="85dp"
         android:stackFromBottom="false"></ListView>
 
 </android.widget.RelativeLayout>

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VUT-Companion.iml" filepath="$PROJECT_DIR$/VUT-Companion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VUT-Companion prova menus.iml" filepath="$PROJECT_DIR$/VUT-Companion prova menus.iml" />
       <module fileurl="file://$PROJECT_DIR$/VUTCompanion.iml" filepath="$PROJECT_DIR$/VUTCompanion.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
