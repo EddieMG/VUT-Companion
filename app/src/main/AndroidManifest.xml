@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.upc.eseiaat.pma.vutcompanion">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,10 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".AdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".EliminateAccountActivity"
@@ -43,26 +39,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".TestActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity
-            android:name=".NavDrawerHomeActivity"
-            android:label="@string/title_activity_nav_drawer_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavDrawerTestActivity"
-            android:label="@string/title_activity_nav_drawer_test"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavDrawerResultsListActivity"
-            android:label="@string/title_activity_nav_drawer_results_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavDrawerMyAccountActivity"
-            android:label="@string/title_activity_nav_drawer_my_account"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavDrawerAdminActivity"
-            android:label="@string/title_activity_nav_drawer_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
