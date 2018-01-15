@@ -12,11 +12,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -25,15 +27,18 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AcceptAccountActivity extends AppCompatActivity {
 
     private ArrayList<account> accountList;
+    private ArrayList<String> idList;
     private accountAdapter adapter;
     ListView list;
     RequestQueue requestQueue;
-    //String insertUrl = "http://192.168.1.40/login/acceptAccount.php";
-    String showUrl = "http://192.168.1.40/acceptAccounts/showAccount.php";
+    String acceptUrl = "http://192.168.1.40/manageAccounts/acceptAccount.php";
+    String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
     // TODO: 15/1/2018 FALTA CREAR ELS PHP NECESSARIS PER A FER AQUESTA ACCIÓ 
 
     @Override
@@ -42,6 +47,7 @@ public class AcceptAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accept_account);
 
         accountList = new ArrayList<>();
+        idList = new ArrayList<>();
         list = (ListView) findViewById(R.id.list);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -59,6 +65,8 @@ public class AcceptAccountActivity extends AppCompatActivity {
                         if (user.getString("accepted").equals("0")){
                             String email = user.getString("email");
                             accountList.add(new account(email, false));
+                            String id = user.getString("id");
+                            idList.add(new String(id));
                             adapter.notifyDataSetChanged();
                         }
                     }
@@ -86,7 +94,7 @@ public class AcceptAccountActivity extends AppCompatActivity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> list, View item, int pos, long id) {
-                maybeRemoveItem(pos);
+                maybeAcceptItem(pos);
                 return true;
             }
         });
@@ -102,18 +110,51 @@ public class AcceptAccountActivity extends AppCompatActivity {
         });
 
     }
-    private void maybeRemoveItem(final int pos) {
+    private void maybeAcceptItem(final int pos) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm);
-        builder.setMessage(String.format("Are you sure you want to remove '%s'?", accountList.get(pos).getText()));
-        builder.setPositiveButton(R.string.erease, new DialogInterface.OnClickListener() {
+        builder.setMessage(String.format("Are you sure you want to accept '%s'?", accountList.get(pos).getText()));
+        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                acceptFromDb(pos);
                 accountList.remove(pos);
                 adapter.notifyDataSetChanged();
             }
         });
         builder.setNegativeButton(android.R.string.cancel, null);
         builder.create().show();
+    }
+
+    private void acceptFromDb(final int pos) {
+
+        StringRequest request = new StringRequest(Request.Method.POST,acceptUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error.getMessage());
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parameters = new HashMap<String, String>();
+                parameters.put("id",idList.get(pos));
+
+                return parameters;
+            }
+        };
+        requestQueue.add(request);
+    }
+
+    public void multipleAccept(View view) {
+        for (int i = 0; i < accountList.size(); i++){
+            if (accountList.get(i).isChecked()){
+                maybeAcceptItem(i);
+            }
+        }
     }
 }

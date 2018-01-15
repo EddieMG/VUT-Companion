@@ -27,6 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="11dp"
             android:backgroundTint="@color/colorPrimary"
+            android:onClick="multipleEliminate"
             android:text="Eliminate"
             android:textAllCaps="false"
             android:textColor="@color/colorText"

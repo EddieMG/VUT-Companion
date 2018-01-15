@@ -41,4 +41,5 @@
     <string name="title_activity_nav_drawer_results_list">NavDrawerResultsListActivity</string>
     <string name="title_activity_nav_drawer_my_account">NavDrawerMyAccountActivity</string>
     <string name="title_activity_nav_drawer_admin">NavDrawerAdminActivity</string>
+    <string name="accept">Accept</string>
 </resources>
