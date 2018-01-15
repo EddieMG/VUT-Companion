@@ -4,19 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="false"
+    android:paddingTop="150dp"
     tools:context="edu.upc.eseiaat.pma.vutcompanion.TestActivity">
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingTop="150dp" />
 
     <RelativeLayout
         android:id="@+id/editBox"
         android:layout_width="match_parent"
         android:layout_height="?attr/listPreferredItemHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:background="#388c8c8c"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
 
         <Button
             android:id="@+id/addButton"
@@ -26,6 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="11dp"
             android:backgroundTint="@color/colorPrimary"
+            android:onClick="addgraph"
             android:text="Add graph"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
@@ -42,16 +51,7 @@
             android:onClick="GoToResults"
             app:srcCompat="@android:drawable/ic_menu_save"
             tools:background="@color/colorPrimary" />
-    </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listview_spinner"
-        style="@style/Widget.AppCompat.ListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editBox"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="85dp"
-        android:stackFromBottom="false"></ListView>
+    </RelativeLayout>
 
 </android.widget.RelativeLayout>

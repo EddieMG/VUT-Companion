@@ -134,7 +134,6 @@ public class ResultsListActivity extends AppCompatActivity
         try {
             Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
             Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
-            num_graph = getIntent().getExtras().getInt(ResultsListActivity.Num_Graph);
             gotExtra=true;
         }catch (NullPointerException e){gotExtra=false;}
         list = (ListView)findViewById(R.id.list1);
@@ -170,7 +169,6 @@ public class ResultsListActivity extends AppCompatActivity
                 Intent intent = new Intent(ResultsListActivity.this, ResultsActivity.class);
                 intent.putExtra(TextKey,title);
                 intent.putExtra(TextKey2,date);
-                intent.putExtra(Num_Graph,num_graph);
                 startActivity(intent);
             }
         });

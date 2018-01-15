@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,27 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import static java.lang.System.out;
 
 
 public class TestActivity extends AppCompatActivity
@@ -32,14 +53,36 @@ public class TestActivity extends AppCompatActivity
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
-    public static String  Num_Graph = "NumberOfGraphics";
+    public static String  nomtxt = "nomtxt";
     public static String  Nom;
     public static String  Data;
+    String showUrl ="http://192.168.1.40/test_data/showData.php";
+    RequestQueue requestQueue;
+    public int a;
+    public int b;
 
-    private ListView lvSpinner;
     private Button addPlot;
-    private int num_graphs = 1;
 
+    private void writeItemList(final  String FILENAME,LineGraphSeries<DataPoint> series) {
+        try {
+            Log.e("eddie","escriptura11");
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            ObjectOutputStream oout = new ObjectOutputStream(out);
+
+            oout.writeObject(series);
+            oout.close();
+                Log.e("eddie","escriptura");
+
+
+        } catch (FileNotFoundException e) {
+            Log.e("Eddie", "writeItemList: FileNotFoundException");
+        } catch (IOException e) {
+            Log.e("Eddie", "writeItemList: IOException ");
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.e("Eddie", "IndexOutOfBoundsException ");
+        }
+    }
     @Override
     public void onStop() {
         super.onStop();
@@ -50,7 +93,7 @@ public class TestActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_test);
 
-        showGraphsList();
+        addPlot = (Button) findViewById(R.id.addButton);
         popup();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -173,35 +216,65 @@ public class TestActivity extends AppCompatActivity
         alert.show();
     }
 
-    private void showGraphsList() {
-        lvSpinner = (ListView) findViewById(R.id.listview_spinner);
-        addPlot = (Button) findViewById(R.id.addButton);
 
-        final ArrayList<String> mData = new ArrayList<>();
-        mData.add("Test1");
-        ArrayList<String> mSpinnerData = new ArrayList<>();
-        final GraphSpinnerAdapter adapter = new GraphSpinnerAdapter(mData, mSpinnerData, this);
 
-        addPlot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mData.add("new");
-                adapter.notifyDataSetChanged();
-                lvSpinner.smoothScrollToPosition(mData.size()-1);
-                num_graphs++;
-            }
-        });
 
-        lvSpinner.setAdapter(adapter);
-
-    }
 
     public void GoToResults(View view) {
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
-        intent.putExtra(Num_Graph,num_graphs);
         startActivity(intent);
     }
-}
+
+    public void addgraph(View view) {
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        for (int i = 0; i < 25; i++) {
+            READ();
+            LineGraphSeries<DataPoint> series=new LineGraphSeries<>(new DataPoint[] {
+                    new DataPoint(a, b),
+            });
+            graph.addSeries(series);
+
+        }
+      
+        writeItemList(String.format(Data+Nom),series);
+
+
+    }
+    public void READ(){
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        Log.i("EDDI","Pas 0");
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
+        @Override
+        public void onResponse(JSONObject response) {
+            Log.i("EDDI","Pas 1");
+            try {
+                JSONArray students = response.getJSONArray("students");
+                Log.i("EDI","Pas 2");
+                for (int i ; i < students.length(); i++){
+                    JSONObject data = students.getJSONObject(i);
+                    Log.i("EDDI","Pas 3");
+                        a=data.getInt("time_series");
+                        b=data.getInt("thrust");
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.i("EDDI","exeption");
+            }
+
+
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            System.out.println(error);
+        }
+    });
+        requestQueue.add(jsonObjectRequest);
+
+}}
 
