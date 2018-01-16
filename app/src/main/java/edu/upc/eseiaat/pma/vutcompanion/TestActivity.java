@@ -48,10 +48,7 @@ import static java.lang.System.out;
 
 public class TestActivity extends AppCompatActivity
 
-
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
 
 
     private AlertDialog.Builder alert;

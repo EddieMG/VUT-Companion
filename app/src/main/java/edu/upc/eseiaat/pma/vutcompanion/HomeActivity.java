@@ -1,6 +1,7 @@
 package edu.upc.eseiaat.pma.vutcompanion;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +41,9 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        email = getIntent().getExtras().getString(LoginActivity.TextKey);
+
         setContentView(R.layout.activity_nav_drawer_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +57,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        email = getIntent().getExtras().getString(LoginActivity.TextKey);
+
 
         checkIfAdmin(email);
 

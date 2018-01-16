@@ -42,4 +42,5 @@
     <string name="title_activity_nav_drawer_my_account">NavDrawerMyAccountActivity</string>
     <string name="title_activity_nav_drawer_admin">NavDrawerAdminActivity</string>
     <string name="accept">Accept</string>
+    <string name="email_header" >%1$s</string>
 </resources>
