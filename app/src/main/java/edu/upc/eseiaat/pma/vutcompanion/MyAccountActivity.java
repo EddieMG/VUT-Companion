@@ -128,7 +128,7 @@ public class MyAccountActivity extends AppCompatActivity
 
     private void changePassword(final String email) {                   //Comunicació amb el servidor per al canvi de contrasenya
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-
+//Fem un request per a un objecte de tipus JSON, el qual ens retornarà un array JSON de totes les entrades de la base de dades
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

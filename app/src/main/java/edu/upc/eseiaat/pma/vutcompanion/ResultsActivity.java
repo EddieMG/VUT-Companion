@@ -53,7 +53,7 @@ public void READ(final String Magnitud){                //Llegim del servidor le
     final String Magnitud1=lines[1];
     requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-
+//Fem un request per a un objecte de tipus JSON, el qual ens retornarà un array JSON de totes les entrades de la base de dades
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {   //Fem la request amb Json al server
