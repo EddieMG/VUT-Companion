@@ -154,7 +154,8 @@ public class TestActivity extends AppCompatActivity
         return true;
     }
 
-    private void popup() {              //Creem un popup que solicitarà les dades necessaries per realitzar les operacions de l'activitat, en aquest
+    private void popup() {              //Creem un popup que solicitarà les dades necessaries per
+                                        // realitzar les operacions de l'activitat, en aquest
                                         //cas obtenim les string per posar un titol una data i unna magnitud.
         alert = new AlertDialog.Builder(TestActivity.this);
         Context context = alert.getContext();
