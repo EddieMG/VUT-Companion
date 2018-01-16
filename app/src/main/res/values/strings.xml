@@ -5,7 +5,7 @@
     <string name="timeInfo">Focus on data, not swapping batteries. A reliable and very efficient technology chosen for our drones, which offers great results.</string>
     <string name="maintenanceInfo">Use of electric motors instead of combustion engines, in takeoff and landing, this results in a lower cost of maintenance.</string>
     <string name="title_activity_login">Sign in</string>
-
+    <string name="IP">192.168.1.40</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

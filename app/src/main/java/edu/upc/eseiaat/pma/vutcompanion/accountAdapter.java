@@ -12,9 +12,7 @@ import android.widget.CheckBox;
 
 import java.util.List;
 
-/**
- * Created by ferra_000 on 13/12/2017.
- */
+
 
 public class accountAdapter extends ArrayAdapter<account> {
 

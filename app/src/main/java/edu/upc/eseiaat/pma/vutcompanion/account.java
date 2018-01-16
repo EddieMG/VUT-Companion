@@ -1,8 +1,6 @@
 package edu.upc.eseiaat.pma.vutcompanion;
 
-/**
- * Created by ferra_000 on 13/12/2017.
- */
+
 
 public class account {
     private String text;

@@ -45,18 +45,13 @@ public class ResultsActivity extends AppCompatActivity {
                 try {
                     Log.i("edd", "readItemList");
                        FileInputStream fis = openFileInput(FILENAME);
-                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
-                    series=(LineGraphSeries<DataPoint>)ois.readObject();
-                    ois.close();
+
                     GraphView graph = (GraphView) findViewById(R.id.graph);
                     graph.addSeries(series);
 
-                    } catch (FileNotFoundException e) {
-                        Log.i("edd", "readItemList: FileNotFoundException");
-                    } catch (IOException e) {
+                } catch (IOException e) {
                         Log.e("edd", "readItemList: IOException");
-                   } catch(ClassNotFoundException e) {
-                        Log.e("edd", "classnotfound");
+
     }
 }}
 
