@@ -8,13 +8,6 @@
     android:paddingTop="150dp"
     tools:context="edu.upc.eseiaat.pma.vutcompanion.TestActivity">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="200dp" />
-
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
         android:layout_width="match_parent"

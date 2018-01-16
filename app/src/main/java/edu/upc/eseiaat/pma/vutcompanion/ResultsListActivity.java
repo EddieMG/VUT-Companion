@@ -42,6 +42,7 @@ public class ResultsListActivity extends AppCompatActivity
 
     private void writeItemList() {
         try {
+            Log.e("eddie","escriptura11");
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             for (int i = 0; i < contador; i++) {
 
@@ -51,9 +52,11 @@ public class ResultsListActivity extends AppCompatActivity
 
                 String line = String.format("%s;%s\n", title, date);
                 fos.write(line.getBytes());
+                Log.e("eddie","escriptura");
             }
 
-            fos.close();
+            fos.close(); // ... and close
+
         } catch (FileNotFoundException e) {
             Log.e("Eddie", "writeItemList: FileNotFoundException");
         } catch (IOException e) {
@@ -82,6 +85,7 @@ public class ResultsListActivity extends AppCompatActivity
                         return;
                     }
 
+
                     HashMap<String, String> datum2 = new HashMap<String, String>();
                     datum2.put("title", title);
                     datum2.put("date", date);
@@ -97,7 +101,10 @@ public class ResultsListActivity extends AppCompatActivity
             fis.close();
         } catch (FileNotFoundException e) {
             Log.i("edd", "readItemList: FileNotFoundException");
-        } catch (IOException e) {
+        }catch(ArrayIndexOutOfBoundsException e){
+            Log.i("edd", "ArrayIndexOutOfBoundsException: ");
+        }
+        catch (IOException e) {
             Log.e("edd", "readItemList: IOException");
         }
     }
@@ -198,6 +205,7 @@ public class ResultsListActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

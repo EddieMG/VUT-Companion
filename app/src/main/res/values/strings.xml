@@ -32,7 +32,7 @@
 
     <string-array name="options">
         <item>Thrust</item>
-        <item>Pressure</item>
+        <item>Presure</item>
         <item>Temperature</item>
         <item>Wind</item>
     </string-array>

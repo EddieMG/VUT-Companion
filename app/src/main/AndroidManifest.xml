@@ -24,8 +24,10 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".AdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".EliminateAccountActivity" />
-        <activity android:name=".AcceptAccountActivity" />
+        <activity android:name=".EliminateAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".AcceptAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".MyAccountActivity"
