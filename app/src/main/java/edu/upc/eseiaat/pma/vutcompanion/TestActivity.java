@@ -154,7 +154,8 @@ public class TestActivity extends AppCompatActivity
         return true;
     }
 
-    private void popup() {
+    private void popup() {              //Creem un popup que solicitarà les dades necessaries per realitzar les operacions de l'activitat, en aquest
+                                        //cas obtenim les string per posar un titol una data i unna magnitud.
         alert = new AlertDialog.Builder(TestActivity.this);
         Context context = alert.getContext();
         final LinearLayout layout = new LinearLayout(context);
@@ -209,7 +210,7 @@ public class TestActivity extends AppCompatActivity
         alert.show();
     }
 
-    public void GoToResults(View view) {
+    public void GoToResults(View view) {                                            //Et porta a la REsultsListActivity emmagatzmemant la informació necessaria.
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
@@ -225,7 +226,7 @@ public class TestActivity extends AppCompatActivity
     }
 
 
-    public void READ( final String Magnitud){
+    public void READ( final String Magnitud){                       //Llegim del servidor les dades de l'experminent en funció de la magnitud que carreguem de la ResultsListActivity.
             requestQueue = Volley.newRequestQueue(getApplicationContext());
 
 
@@ -236,24 +237,24 @@ public class TestActivity extends AppCompatActivity
             try {
                 JSONArray students = response.getJSONArray("students");
 
-                DataPoint[] values = new DataPoint[students.length()];
+                DataPoint[] values = new DataPoint[students.length()];//Creem un datapoint amb la length de la taula del servidor
                 for (int i=0 ; i < students.length(); i++){
                     JSONObject data = students.getJSONObject(i);
 
-                    Log.i("EDDI","Pas 3");
+                 
                     a=data.getInt("time_series");
-                    b=data.getInt(Magnitud);
+                    b=data.getInt(Magnitud);                //Dins del for nem afegint als datapoints els valors de la taula del servidor
                     DataPoint v = new DataPoint(a, b);
                     values[i] = v;
 
                 }
 
-                series = new LineGraphSeries<DataPoint>(values);
+                series = new LineGraphSeries<DataPoint>(values);            //Creem la Linear Graph Series
                 GraphView graph = (GraphView) findViewById(R.id.graph);
-                graph.addSeries(series);
+                graph.addSeries(series);                                     //Grafiquem la serie
 
 
-                Log.e("EDI","FET");
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.i("EDDI","exeption");

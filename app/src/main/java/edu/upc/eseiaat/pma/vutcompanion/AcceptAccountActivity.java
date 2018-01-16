@@ -85,7 +85,7 @@ public class AcceptAccountActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
 
         if (!accountList.isEmpty()){
-            
+
         }
 
         adapter = new accountAdapter(this, android.R.layout.simple_list_item_1, accountList);
