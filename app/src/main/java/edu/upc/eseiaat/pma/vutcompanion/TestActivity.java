@@ -59,10 +59,8 @@ public class TestActivity extends AppCompatActivity
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
-    public static String  TextKey3 = "TextKey3";
     public static String  Nom;
     public static String  Data;
-    public static String  Magnitud;
     String showUrl ="http://192.168.1.40/test_data/showData.php";
     public RequestQueue requestQueue;
     public int a;
@@ -208,9 +206,6 @@ public class TestActivity extends AppCompatActivity
         layout.addView(text2,layoutParams);
         layout.addView(editText1,layoutParams);
 
-        editText2.setHint("Magnitud");
-        editText2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-
         layout.addView(text3,layoutParams);
 
         layout.addView(editText2,layoutParams);
@@ -221,7 +216,6 @@ public class TestActivity extends AppCompatActivity
 
                 Nom = editText.getText().toString();
                 Data = editText1.getText().toString();
-                Magnitud= editText2.getText().toString();
             }
         });
 
@@ -242,7 +236,6 @@ public class TestActivity extends AppCompatActivity
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Nom);
         intent.putExtra(TextKey2,Data);
-        intent.putExtra(TextKey3,Magnitud);
         startActivity(intent);
     }
 
@@ -276,6 +269,7 @@ public class TestActivity extends AppCompatActivity
                         values[i] = v;
                         String line = String.format("%s;%s\n", a, b);
                         fos.write(line.getBytes());
+
                     }
                     fos.close();
                     series = new LineGraphSeries<DataPoint>(values);
