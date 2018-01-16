@@ -34,10 +34,10 @@ public class ResultsListActivity extends AppCompatActivity
     private static final  String FILENAME = "shoppinglist.txt";
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
-    public static String  Num_Graph = "NumberOfGraphics";
+    public static String  TextKey3 = "TextKey3";
     private String Data;
     private String Nom;
-    private int num_graph;
+    public static String  Magnitud;
     private boolean gotExtra;
 
     private void writeItemList() {
@@ -84,8 +84,7 @@ public class ResultsListActivity extends AppCompatActivity
                     if (parts[1].isEmpty()){
                         return;
                     }
-                    String[] preu_partit = parts[1].split(" ");
-                    String valor_preu = preu_partit[0];
+
 
                     HashMap<String, String> datum2 = new HashMap<String, String>();
                     datum2.put("title", title);
@@ -134,6 +133,7 @@ public class ResultsListActivity extends AppCompatActivity
         try {
             Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
             Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
+            Magnitud = getIntent().getExtras().getString(ResultsListActivity.TextKey3);
             gotExtra=true;
         }catch (NullPointerException e){gotExtra=false;}
         list = (ListView)findViewById(R.id.list1);
@@ -147,7 +147,7 @@ public class ResultsListActivity extends AppCompatActivity
             Log.e("eddie","bullshite");
             HashMap<String, String> datum2 = new HashMap<String, String>();
             datum2.put("title", Nom);
-            datum2.put("date", Data);
+            datum2.put("date", Data+" "+Magnitud);
             data.add(datum2);
             adapter.notifyDataSetChanged();
             writeItemList();

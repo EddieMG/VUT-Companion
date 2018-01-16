@@ -52,13 +52,15 @@ public class TestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private static final int MAX_BYTES = 8000;
+
     private static  boolean FET =false ;
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
+    public static String  TextKey3 = "TextKey3";
     public static String  Nom;
     public static String  Data;
+    public static String  Magnitud;
     String showUrl ="http://192.168.1.40/test_data/showData.php";
     public RequestQueue requestQueue;
     public int a;
@@ -169,7 +171,8 @@ public class TestActivity extends AppCompatActivity
         final EditText editText1 = new EditText(context);
         final TextView text2=new TextView(context);
         final EditText editText = new EditText(context);
-
+        final TextView text3=new TextView(context);
+        final EditText editText2 = new EditText(context);
         editText.setHint("Nom");
         editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
@@ -179,8 +182,16 @@ public class TestActivity extends AppCompatActivity
 
         editText1.setHint("Data");
         editText1.setInputType(InputType.TYPE_CLASS_DATETIME);
+
         layout.addView(text2,layoutParams);
         layout.addView(editText1,layoutParams);
+
+        editText2.setHint("Magnitud");
+        editText2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+
+        layout.addView(text3,layoutParams);
+
+        layout.addView(editText2,layoutParams);
         alert.setTitle("Nova Entrada");
         alert.setView(layout);
         alert.setPositiveButton("Introduir", new DialogInterface.OnClickListener() {
@@ -188,6 +199,7 @@ public class TestActivity extends AppCompatActivity
 
                 Nom = editText.getText().toString();
                 Data = editText1.getText().toString();
+                Magnitud= editText2.getText().toString();
             }
         });
 
@@ -208,6 +220,7 @@ public class TestActivity extends AppCompatActivity
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
+        intent.putExtra(TextKey3,Magnitud);
         startActivity(intent);
     }
 
@@ -215,46 +228,14 @@ public class TestActivity extends AppCompatActivity
         Log.i("edd", "butó");
 
 
-        READ(String.format(Data+Nom));
-//        if (FET) {
-//            Log.e("EDI","FET2");
-//            readItemList(String.format(Data + Nom));
-//            GraphView graph = (GraphView) findViewById(R.id.graph);
-//            graph.addSeries(series);
-//        }
+        READ(String.format(Data+Nom+".txt"),Magnitud);
+//        READ("odos");
     }
-//    private  void readItemList(final  String FILENAME) {
-//        try {
-//            Log.i("edd", "readItemList");
-//            FileInputStream fis = openFileInput(FILENAME);
-//            byte[] buffer = new byte[MAX_BYTES];
-//            int nread = fis.read(buffer);
-//            int i=0;
-//            DataPoint[] values = new DataPoint[25];
-//            if (nread > 0) {
-//                String content = new String(buffer, 0, nread);
-//                String[] lines = content.split("\n");
-//                for (String line : lines) {
-//                    String[] parts = line.split(";");
-//                    String c = parts[0];
-//                    String d = parts[1];
-//                    DataPoint v = new DataPoint(Integer.parseInt(c), Integer.parseInt(d));
-//                    values[i] = v;
-//                    i++;
-//                    if (parts[1].isEmpty()) {
-//                        return;
-//
-//                    }
-//                }
-//            }
-//            series = new LineGraphSeries<DataPoint>(values);
-//        } catch (IOException e) {
-//                Log.e("edd", "readItemList: IOException");
-//        }}
 
-    public void READ(final String FILENAME){
+
+    public void READ(final String FILENAME, final String Magnitud){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
-   // TODO:CHECK AMB GET I NO POST
+
         Log.i("EDDI","Pas 0");
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
         @Override
@@ -270,7 +251,7 @@ public class TestActivity extends AppCompatActivity
 
                     Log.i("EDDI","Pas 3");
                     a=data.getInt("time_series");
-                    b=data.getInt("thrust");
+                    b=data.getInt(Magnitud);
                     DataPoint v = new DataPoint(a, b);
                     values[i] = v;
                     String line = String.format("%s;%s\n", a, b);
