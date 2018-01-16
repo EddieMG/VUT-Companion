@@ -101,7 +101,10 @@ public class ResultsListActivity extends AppCompatActivity
             fis.close();
         } catch (FileNotFoundException e) {
             Log.i("edd", "readItemList: FileNotFoundException");
-        } catch (IOException e) {
+        }catch(ArrayIndexOutOfBoundsException e){
+            Log.i("edd", "ArrayIndexOutOfBoundsException: ");
+        }
+        catch (IOException e) {
             Log.e("edd", "readItemList: IOException");
         }
     }
