@@ -37,11 +37,11 @@ public class ResultsListActivity extends AppCompatActivity
     public static String  TextKey3 = "TextKey3";
     private String Data;
     private String Nom;
+    public static String  Magnitud;
     private boolean gotExtra;
 
     private void writeItemList() {
         try {
-            Log.e("eddie","escriptura11");
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             for (int i = 0; i < contador; i++) {
 
@@ -51,11 +51,9 @@ public class ResultsListActivity extends AppCompatActivity
 
                 String line = String.format("%s;%s\n", title, date);
                 fos.write(line.getBytes());
-                Log.e("eddie","escriptura");
             }
 
-            fos.close(); // ... and close
-
+            fos.close();
         } catch (FileNotFoundException e) {
             Log.e("Eddie", "writeItemList: FileNotFoundException");
         } catch (IOException e) {
@@ -83,7 +81,6 @@ public class ResultsListActivity extends AppCompatActivity
                     if (parts[1].isEmpty()){
                         return;
                     }
-
 
                     HashMap<String, String> datum2 = new HashMap<String, String>();
                     datum2.put("title", title);
@@ -132,6 +129,7 @@ public class ResultsListActivity extends AppCompatActivity
         try {
             Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
             Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
+            Magnitud = getIntent().getExtras().getString(ResultsListActivity.TextKey3);
             gotExtra=true;
         }catch (NullPointerException e){gotExtra=false;}
         list = (ListView)findViewById(R.id.list1);
@@ -145,7 +143,7 @@ public class ResultsListActivity extends AppCompatActivity
             Log.e("eddie","bullshite");
             HashMap<String, String> datum2 = new HashMap<String, String>();
             datum2.put("title", Nom);
-            datum2.put("date", Data);
+            datum2.put("date", Data+" "+Magnitud);
             data.add(datum2);
             adapter.notifyDataSetChanged();
             writeItemList();
@@ -200,7 +198,6 @@ public class ResultsListActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

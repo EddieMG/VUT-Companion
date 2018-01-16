@@ -55,10 +55,10 @@ public class TestActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static  boolean FET =false ;
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
+    public static String  TextKey3 = "TextKey3";
     public static String  Nom;
     public static String  Data;
     String showUrl ="http://192.168.1.40/test_data/showData.php";
@@ -66,7 +66,6 @@ public class TestActivity extends AppCompatActivity
     public int a;
     public int b;
     public LineGraphSeries<DataPoint> series;
-    private Button addPlot;
     private String data_type;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
@@ -82,7 +81,7 @@ public class TestActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_test);
 
-        addPlot = (Button) findViewById(R.id.addButton);
+
         popup();
 
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -224,64 +223,49 @@ public class TestActivity extends AppCompatActivity
     }
 
 
-
-
-
     public void GoToResults(View view) {
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
+        intent.putExtra(TextKey3,data_type);
         startActivity(intent);
     }
 
     public void addgraph(View view) {
         Log.i("edd", "butó");
 
-        READ(String.format(Nom+Data+".txt"));
+        READ();
     }
 
-
-    public void READ(final String FILENAME){
+    public void READ(){
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        // TODO:CHECK AMB GET I NO POST
-        Log.i("EDDI","Pas 0");
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("EDDI","Pas 1");
                 try {
                     JSONArray students = response.getJSONArray("students");
-                    Log.i("EDI","Pas 2");
-                    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+
                     DataPoint[] values = new DataPoint[students.length()];
                     for (int i=0 ; i < students.length(); i++){
                         JSONObject data = students.getJSONObject(i);
 
-                        Log.i("EDDI","Pas 3");
                         a=data.getInt("time_series");
                         b=data.getInt(data_type);
                         DataPoint v = new DataPoint(a, b);
                         values[i] = v;
-                        String line = String.format("%s;%s\n", a, b);
-                        fos.write(line.getBytes());
 
                     }
-                    fos.close();
+
                     series = new LineGraphSeries<DataPoint>(values);
                     GraphView graph = (GraphView) findViewById(R.id.graph);
                     graph.addSeries(series);
                     spinner.setEnabled(false);
-//               FET=true;
 
-                    Log.e("EDI","FET");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.i("EDDI","exeption");
-                } catch (FileNotFoundException e) {
-                    Log.e("Eddie", "writeItemList: FileNotFoundException");
-                } catch (IOException e) {
-                    Log.e("Eddie", "writeItemList: IOException ");
-
                 } catch (IndexOutOfBoundsException e) {
                     Log.e("Eddie", "IndexOutOfBoundsException ");
                 }
