@@ -41,6 +41,18 @@ public class LoginActivity extends AppCompatActivity {
         sign_in_register = (Button) findViewById(R.id.email_sign_in_button);
 
         requestQueue = Volley.newRequestQueue(this);
+        //Com hem fet en altres casos anterior, per a comprovar si les dades
+        //si l'usuari pertany a la base de dades, realitzem una petició al
+        //servidor, el qual, a través del codi PHP descrit a l'arxiu ubicat en
+        //"http://192.168.1.40/login/user_control.php", a partir del email i
+        //la contrassenya donarà 3 resultats possibles.
+        //El 1r és que l'usuari es trobi a la base de dades amb la contrassenya escrita, per tant podrà accedir a l'app
+        //La 2a és que l'usuari no es trobi a la base de dades amb l'email, situació en la que es crearà un usuari nou,
+        //que encara pendent d'acceptació no podrà entrar.
+        //Finalment hi ha l'opció de que l'usuari es trobi dins la base de dades però la contrassenya no coincideixi, o que
+        //totes dues coses coincideixin, però que la conta no hagi sigut aprovada encara, situació en la qual l'usuari no podrà
+        //entrar.
+        //En tots els casos sempre es notifica a l'usuari del que està succeint a través d'un Toast
 
         sign_in_register.setOnClickListener(new View.OnClickListener() {
             @Override

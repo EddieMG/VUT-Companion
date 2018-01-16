@@ -1,6 +1,7 @@
 package edu.upc.eseiaat.pma.vutcompanion;
 
-
+//Creem una classe per a l'objecte "account", el qual emmagatzemarà el seu nom (email) i un boolea
+//per a saber si està seleccionat
 
 public class account {
     private String text;

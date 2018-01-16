@@ -95,6 +95,8 @@ public class AdminActivity extends AppCompatActivity
         return true;
     }
 
+    //Segons el botó que cliquem entrem en una activitat o en una altra
+
     public void acceptAccounts(View view) {
         Intent accept = new Intent(AdminActivity.this, AcceptAccountActivity.class);
         startActivity(accept);

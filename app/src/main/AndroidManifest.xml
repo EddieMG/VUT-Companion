@@ -34,8 +34,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ResultsListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ResultsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ResultsActivity" />
         <activity android:name=".TestActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>

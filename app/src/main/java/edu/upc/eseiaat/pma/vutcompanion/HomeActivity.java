@@ -53,12 +53,15 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // TODO: 15/1/2018 FER QUE QUALSEVOL INTENT CANVII EL VALOR DE email. 
         email = getIntent().getExtras().getString(LoginActivity.TextKey);
 
         checkIfAdmin(email);
 
     }
+
+    //Per a comprovar si l'usuari és administrador, creem un mètode que el que farà serà llegir de
+    //la base de dades tota la informació de l'entrada que estigui relacionada amb el email, el qual
+    //passem a través de l'intent de canvi d'activitat.
 
     private void checkIfAdmin(final String email) {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -74,8 +77,10 @@ public class HomeActivity extends AppCompatActivity
                         JSONObject user = users.getJSONObject(i);
 
                         if (user.getString("email").equals(email) && user.getString("admin").equals("1")){
-                           isAdmin = true;
-                        }
+                           isAdmin = true;      //Si l'usuari és administrador, activem un boolea, que serà
+                                                //el condicionant més tard de que al clickar a qualsevol de les
+                        }                       //formes per a passar a la pantalla de Admininstrador l'app
+                                                //pugi realitzar l'intent o no
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -173,7 +178,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void gotoAdmin(View view) {
-        if (isAdmin){
+        if (isAdmin){       //Com deiem abans, no podrà accedir a l'actiitat Admin a no ser que tingui el boolea isAdmin=1
             Intent admin = new Intent(HomeActivity.this, AdminActivity.class);
             startActivity(admin);
         }else {

@@ -36,6 +36,13 @@ public class EliminateAccountActivity extends AppCompatActivity {
     String eliminateUrl = "http://192.168.1.40/manageAccounts/eliminateAccount.php";
     String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
 
+    //Com hem fet en el cas de l'activitat per a acceptar usuaris, per a eliminar-los fem exactament
+    //el mateix, primer cridem una funció que ens permet llegir de la base de dades tots els usuaris
+    // que han estat acceptats, i en fem un ListView.
+    //Seguidament en comptes de modificar un paràmetre de l'usuari amb la id especificada, per a aquest
+    //cas n'eliminem tota la informació. El codi dins de l'activitat per a dur a terme aquesta funció
+    //és el mateix pràcticament, i el que realment marca la diferència a l'hora d'escriure/esborrar a
+    //la base de dades són els arxius PHP que cridem amb la direcció de dalt (http://192.168.1.40/manage/eliminateAccount.php)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

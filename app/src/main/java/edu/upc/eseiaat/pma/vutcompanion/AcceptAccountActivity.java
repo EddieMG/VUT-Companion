@@ -50,22 +50,22 @@ public class AcceptAccountActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.list);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-
+        //Fem un request per a un objecte de tipus JSON, el qual ens retornarà un array JSON de totes les entrades de la base de dades
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 try {
-                    JSONArray users = response.getJSONArray("users");
+                    JSONArray users = response.getJSONArray("users");   //guardem l'ARRAY
 
-                    for (int i = 0; i < users.length(); i++){
+                    for (int i = 0; i < users.length(); i++){           //agafem per individual cada objecte, i n'extreiem la informació que volem
                         JSONObject user = users.getJSONObject(i);
 
                         if (user.getString("accepted").equals("0")){
                             String email = user.getString("email");
                             accountList.add(new account(email, false));
                             String id = user.getString("id");
-                            idList.add(new String(id));
+                            idList.add(new String(id));                     //anem actualitzant la llista
                             adapter.notifyDataSetChanged();
                         }
                     }
@@ -109,7 +109,7 @@ public class AcceptAccountActivity extends AppCompatActivity {
         });
 
     }
-    private void maybeAcceptItem(final int pos) {
+    private void maybeAcceptItem(final int pos) {       //Procedim a mostrar un alert dialog per a confirmar que l'usuari vol acceptar un usuari
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm);
         builder.setMessage(String.format("Are you sure you want to accept '%s'?", accountList.get(pos).getText()));
@@ -117,7 +117,7 @@ public class AcceptAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 acceptFromDb(pos);
-                accountList.remove(pos);
+                accountList.remove(pos);                    //L'esborrem de la llista que es mostra per pantalla
                 adapter.notifyDataSetChanged();
             }
         });
@@ -125,8 +125,8 @@ public class AcceptAccountActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void acceptFromDb(final int pos) {
-
+    private void acceptFromDb(final int pos) {              //Modifiquem el camp "accepted" de l'usuari, que passara a ser 1
+                                                            //El metode es molt semblant al que fem servir per a rebre dades
         StringRequest request = new StringRequest(Request.Method.POST,acceptUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -141,8 +141,8 @@ public class AcceptAccountActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parameters = new HashMap<String, String>();
-                parameters.put("id",idList.get(pos));
-
+                parameters.put("id",idList.get(pos));                   //Enviem la id de la persona que volem acceptar,
+                                                                        //així la localitzem a la base de dades
                 return parameters;
             }
         };

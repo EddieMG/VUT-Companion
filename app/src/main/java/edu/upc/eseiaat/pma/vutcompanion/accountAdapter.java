@@ -12,7 +12,8 @@ import android.widget.CheckBox;
 
 import java.util.List;
 
-
+//Creem una classe per a especificar l'adaptador especial que necessitarem per a fer un ListView
+//d'objectes de tipus "account"
 
 public class accountAdapter extends ArrayAdapter<account> {
 
@@ -25,8 +26,8 @@ public class accountAdapter extends ArrayAdapter<account> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View result = convertView;
         if(result == null){
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            result = inflater.inflate(R.layout.item_layout, null);
+            LayoutInflater inflater = LayoutInflater.from(getContext());    //Inflem el layout de l'item
+            result = inflater.inflate(R.layout.item_layout, null);      //per a crear una nova "pastilla"
         }
         CheckBox Item = (CheckBox)result.findViewById(R.id.item);
         account item = getItem(position);

@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="edu.upc.eseiaat.pma.vutcompanion.ResultsActivity">
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="70dp"
         android:paddingTop="150dp" />
     <RelativeLayout
         android:layout_width="match_parent"
