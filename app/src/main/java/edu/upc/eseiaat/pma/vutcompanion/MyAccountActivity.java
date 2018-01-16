@@ -51,7 +51,7 @@ public class MyAccountActivity extends AppCompatActivity
     RequestQueue requestQueue;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {        //En el metode onCreate implementem la toolbar,el menú i la navigation bar i recuperem les dades de la HomeActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_my_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -74,7 +74,8 @@ public class MyAccountActivity extends AppCompatActivity
 
     }
 
-    private void popup() {
+    private void popup() {                                              //Creem un popup que solicitarà les dades necessaries per realitzar les operacions de l'activitat, en aquest
+                                                                        //cas obtenim les string per canviar la constrasenya.
         alert = new AlertDialog.Builder(MyAccountActivity.this);
         Context context = alert.getContext();
         final LinearLayout layout = new LinearLayout(context);
@@ -125,7 +126,7 @@ public class MyAccountActivity extends AppCompatActivity
         alert.show();
     }
 
-    private void changePassword(final String email) {
+    private void changePassword(final String email) {                   //Comunicació amb el servidor per al canvi de contrasenya
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
@@ -159,7 +160,7 @@ public class MyAccountActivity extends AppCompatActivity
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void change(final String id) {
+    private void change(final String id) {                                          //Canvi del valor de password al servidor.
         StringRequest request = new StringRequest(Request.Method.POST,passwordUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

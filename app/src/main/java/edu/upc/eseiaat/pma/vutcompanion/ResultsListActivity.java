@@ -40,7 +40,7 @@ public class ResultsListActivity extends AppCompatActivity
     public static String  Magnitud;
     private boolean gotExtra;
 
-    private void writeItemList() {
+    private void writeItemList() {                  //Llegim del fitxer on emmagatzememnt els experiments.
         try {
 
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -69,7 +69,7 @@ public class ResultsListActivity extends AppCompatActivity
 
 
 
-    private  void readItemList() {
+    private  void readItemList() {              //Escrivim a un fitxer la llista de experiments que tenim
         try {
             FileInputStream fis = openFileInput(FILENAME);
             byte[] buffer = new byte[MAX_BYTES];
@@ -110,7 +110,7 @@ public class ResultsListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {                  // Per no perdre la llista al destruirse
 
         super.onStop();
 
@@ -118,7 +118,7 @@ public class ResultsListActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {                // Al crear lactivitat recuperem la informació, si en tenim creem el hashmap. Sino simplement recuperem la llista.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_results_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -147,10 +147,9 @@ public class ResultsListActivity extends AppCompatActivity
         list.setAdapter(adapter);
         readItemList();
         if (gotExtra){
-            Log.e("eddie","bullshite");
             HashMap<String, String> datum2 = new HashMap<String, String>();
             datum2.put("title", Nom);
-            datum2.put("date", Data+" "+Magnitud);
+            datum2.put("date", Data+" "+Magnitud);          // Ajuntem en la clau date dues strings que despres separarem.
             data.add(datum2);
             adapter.notifyDataSetChanged();
             writeItemList();
@@ -165,7 +164,7 @@ public class ResultsListActivity extends AppCompatActivity
         });
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {     //Per anar a Results emmagatzmeent als Extres la informació necessaria.
                 HashMap<String, String> hash = data.get(pos);
                 String date = hash.get("date");
                 String title = hash.get("title");

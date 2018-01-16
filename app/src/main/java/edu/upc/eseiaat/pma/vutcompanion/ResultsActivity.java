@@ -31,7 +31,7 @@ public class ResultsActivity extends AppCompatActivity {
     public int a;
     public int b;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {                //Creem una activitat per llegir els resultats d'un experiment al servidor.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
@@ -47,33 +47,33 @@ public class ResultsActivity extends AppCompatActivity {
         READ(dateRecived);
     }
 
-public void READ(final String Magnitud){
+public void READ(final String Magnitud){                //Llegim del servidor les dades de l'experminent en funció de la magnitud que carreguem de la ResultsListActivity.
 
-    String[] lines = Magnitud.split(" ");
+    String[] lines = Magnitud.split(" ");               //Separem de lstring el valor que ens interessa.
     final String Magnitud1=lines[1];
     requestQueue = Volley.newRequestQueue(getApplicationContext());
 
 
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
         @Override
-        public void onResponse(JSONObject response) {
+        public void onResponse(JSONObject response) {   //Fem la request amb Json al server
 
             try {
                 JSONArray students = response.getJSONArray("students");
 
 
-                DataPoint[] values = new DataPoint[students.length()];
+                DataPoint[] values = new DataPoint[students.length()];   //Creem un datapoint amb la length de la taula del servidor
                 for (int i=0 ; i < students.length(); i++){
                     JSONObject data = students.getJSONObject(i);
 
-                    a=data.getInt("time_series");
+                    a=data.getInt("time_series");                       //Dins del for nem afegint als datapoints els valors de la taula del servidor
                     b=data.getInt(Magnitud1);
                     DataPoint v = new DataPoint(a, b);
                     values[i] = v;
                 }
-                series = new LineGraphSeries<DataPoint>(values);
+                series = new LineGraphSeries<DataPoint>(values);                //Creem la Linear Graph Series
                 GraphView graph = (GraphView) findViewById(R.id.graph);
-                graph.addSeries(series);
+                graph.addSeries(series);                                        //Grafiquem la serie
 
 
 
