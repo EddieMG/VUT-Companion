@@ -30,10 +30,15 @@ public class ResultsActivity extends AppCompatActivity {
     public RequestQueue requestQueue;
     public int a;
     public int b;
+    public static String EmailKey = "EmailKey";
+    private static String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {                //Creem una activitat per llegir els resultats d'un experiment al servidor.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
+        email = getIntent().getExtras().getString(EmailKey);
 
         TextView title = (TextView) findViewById(R.id.resultTitle);
         TextView date = (TextView) findViewById(R.id.dateTextView);

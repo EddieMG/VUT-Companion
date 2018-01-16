@@ -3,7 +3,7 @@
     <string name="app_name">Venturi Unmaned Vehicles</string>
     <string name="Accepts_Accounts">Aceptar cuentas</string>
     <string name="Add_graph">Añadir gràfico</string>
-    <string name="Admin">ADMIN</string>
+    <string name="Admin">ADMINISTRACION</string>
     <string name="Change_password">Cambiar contraseña</string>
     <string name="Delete">Eliminar</string>
     <string name="Eliminate_Acounts">Eliminar cuentas</string>
@@ -17,4 +17,11 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="register">Registrarse</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="no_admin">No eres administrador</string>
+    <string name="Home">INICIO</string>
+    <string name="Results">RESULTADOS</string>
+    <string name="erease">Borrar</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+    <string name="results">RESULTADOS</string>
 </resources>

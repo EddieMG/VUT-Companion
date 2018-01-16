@@ -13,12 +13,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class AdminActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static String EmailKey = "EmailKey";
+    private static String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_admin);
+
+        email = getIntent().getExtras().getString(EmailKey);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -73,18 +80,22 @@ public class AdminActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
             Intent account = new Intent(AdminActivity.this, HomeActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.test) {
             Intent account = new Intent(AdminActivity.this, TestActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.results) {
             Intent account = new Intent(AdminActivity.this, ResultsListActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.account) {
             Intent account = new Intent(AdminActivity.this, MyAccountActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         } else if (id == R.id.admin) {
 

@@ -49,6 +49,7 @@ public class MyAccountActivity extends AppCompatActivity
     String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
     String passwordUrl = "http://192.168.1.40/manageAccounts/passwordChange.php";
     RequestQueue requestQueue;
+    public static String EmailKey = "EmailKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {        //En el metode onCreate implementem la toolbar,el menú i la navigation bar i recuperem les dades de la HomeActivity
@@ -67,6 +68,7 @@ public class MyAccountActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         email = getIntent().getExtras().getString(HomeActivity.EmailKey);
+
         emailText = (TextView) findViewById(R.id.emailText);
 
         emailText.setText(email);
@@ -225,20 +227,24 @@ public class MyAccountActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
             Intent account = new Intent(MyAccountActivity.this, HomeActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.test) {
             Intent account = new Intent(MyAccountActivity.this, TestActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.results) {
             Intent account = new Intent(MyAccountActivity.this, ResultsListActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.account) {
 
         } else if (id == R.id.admin) {
             Intent account = new Intent(MyAccountActivity.this, AdminActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         }
 

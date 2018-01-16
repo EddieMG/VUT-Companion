@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String URL = "http://192.168.1.40/login/user_control.php";
     private StringRequest request;
-    public static String  TextKey = "TextKey";
+    public static String EmailKey = "EmailKey";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -64,9 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if(jsonObject.names().get(0).equals("success")){
-                                Toast.makeText(getApplicationContext(),R.string.accept+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
                                 Intent account = new Intent(LoginActivity.this, HomeActivity.class);
-                                account.putExtra(TextKey,email.getText().toString());
+                                account.putExtra(EmailKey,email.getText().toString());
                                 startActivity(account);
                             }else {
                                 if(jsonObject.names().get(0).equals("requested")){

@@ -39,6 +39,8 @@ public class ResultsListActivity extends AppCompatActivity
     private String Nom;
     public static String  Magnitud;
     private boolean gotExtra;
+    public static String EmailKey = "EmailKey";
+    private static String email;
 
     private void writeItemList() {                  //Llegim del fitxer on emmagatzememnt els experiments.
         try {
@@ -121,6 +123,9 @@ public class ResultsListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {                // Al crear lactivitat recuperem la informació, si en tenim creem el hashmap. Sino simplement recuperem la llista.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_results_list);
+
+        email = getIntent().getExtras().getString(EmailKey);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -171,6 +176,7 @@ public class ResultsListActivity extends AppCompatActivity
                 Intent intent = new Intent(ResultsListActivity.this, ResultsActivity.class);
                 intent.putExtra(TextKey,title);
                 intent.putExtra(TextKey2,date);
+                intent.putExtra(EmailKey,email);
                 startActivity(intent);
             }
         });
@@ -215,10 +221,12 @@ public class ResultsListActivity extends AppCompatActivity
         if (id == R.id.home) {
 
             Intent account = new Intent(ResultsListActivity.this, HomeActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.test) {
             Intent account = new Intent(ResultsListActivity.this, TestActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.results) {
@@ -226,9 +234,11 @@ public class ResultsListActivity extends AppCompatActivity
 
         } else if (id == R.id.account) {
             Intent account = new Intent(ResultsListActivity.this,MyAccountActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         } else if (id == R.id.admin) {
             Intent account = new Intent(ResultsListActivity.this, AdminActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         }
 

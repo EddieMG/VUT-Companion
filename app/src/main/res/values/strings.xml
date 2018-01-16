@@ -48,8 +48,12 @@
     <string name="Test">TEST</string>
     <string name="my_account">MY ACCOUNT</string>
     <string name="results">RESULTS</string>
-    <string name="Admin">ADMIN</string>
+    <string name="Admin">ADMINISTRATION</string>
     <string name="Change_password">Change password</string>
     <string name="Add_graph">Add graph</string>
     <string name="Cancel">Cancel</string>
+    <string name="no_admin">You are not an administrator</string>
+    <string name="welcome">Welcome</string>
+    <string name="Home">HOME</string>
+    <string name="Results">RESULTS</string>
 </resources>

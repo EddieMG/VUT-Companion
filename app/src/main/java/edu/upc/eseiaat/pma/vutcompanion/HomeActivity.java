@@ -2,6 +2,7 @@ package edu.upc.eseiaat.pma.vutcompanion;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 public class HomeActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +45,9 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        email = getIntent().getExtras().getString(LoginActivity.TextKey);
+        email = getIntent().getExtras().getString(LoginActivity.EmailKey);
+
+
 
         setContentView(R.layout.activity_nav_drawer_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,18 +149,22 @@ public class HomeActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.test) {
             Intent account = new Intent(HomeActivity.this, TestActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.results) {
             Intent account = new Intent(HomeActivity.this, ResultsListActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.account) {
             Intent account = new Intent(HomeActivity.this, MyAccountActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         } else if (id == R.id.admin) {
             if (isAdmin){
                 Intent account = new Intent(HomeActivity.this, AdminActivity.class);
+                account.putExtra(EmailKey,email);
                 startActivity(account);
             }
         }
@@ -173,20 +182,23 @@ public class HomeActivity extends AppCompatActivity
 
     public void gotoTest(View view) {
         Intent test = new Intent(HomeActivity.this,TestActivity.class);
+        test.putExtra(EmailKey,email);
         startActivity(test);
     }
 
     public void gotoResults(View view) {
         Intent results = new Intent(HomeActivity.this, ResultsListActivity.class);
+        results.putExtra(EmailKey,email);
         startActivity(results);
     }
 
     public void gotoAdmin(View view) {
         if (isAdmin){       //Com deiem abans, no podrà accedir a l'actiitat Admin a no ser que tingui el boolea isAdmin=1
             Intent admin = new Intent(HomeActivity.this, AdminActivity.class);
+            admin.putExtra(EmailKey,email);
             startActivity(admin);
         }else {
-            Toast.makeText(getApplicationContext(), "You are not an administrator", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.no_admin, Toast.LENGTH_SHORT).show();
         }
     }
 }

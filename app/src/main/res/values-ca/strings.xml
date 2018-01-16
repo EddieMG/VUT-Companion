@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Venturi Unmaned Vehicles</string>
     <string name="Accepts_Accounts">Aceptar comptes</string>
-    <string name="Admin">ADMIN</string>
+    <string name="Admin">ADMINISTRACIÓ</string>
     <string name="Delete">Eliminar</string>
     <string name="Eliminate_Acounts">Eliminar comptes</string>
     <string name="Test">TEST</string>
@@ -18,4 +18,10 @@
     <string name="Add_graph">Afegir gràfic</string>
     <string name="confirm">Confirmació</string>
     <string name="Cancel">Cancel·lar</string>
+    <string name="welcome">Benvingut</string>
+    <string name="no_admin">No ets administrador</string>
+    <string name="Home">INICI</string>
+    <string name="Results">RESULTATS</string>
+    <string name="erease">Esborra</string>
+    <string name="error_field_required">Aquest camp es obligatori</string>
 </resources>

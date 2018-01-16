@@ -63,6 +63,8 @@ public class TestActivity extends AppCompatActivity
     public int a;
     public int b;
     public LineGraphSeries<DataPoint> series;
+    public static String EmailKey = "EmailKey";
+    private static String email;
 
 
 
@@ -75,6 +77,8 @@ public class TestActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_test);
+
+        email = getIntent().getExtras().getString(HomeActivity.EmailKey);
 
         popup();
 
@@ -130,19 +134,23 @@ public class TestActivity extends AppCompatActivity
         if (id == R.id.home) {
 
             Intent account = new Intent(TestActivity.this, HomeActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         } else if (id == R.id.test) {
 
 
         } else if (id == R.id.results) {
             Intent account = new Intent(TestActivity.this, ResultsListActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
 
         } else if (id == R.id.account) {
             Intent account = new Intent(TestActivity.this, MyAccountActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         } else if (id == R.id.admin) {
             Intent account = new Intent(TestActivity.this, AdminActivity.class);
+            account.putExtra(EmailKey,email);
             startActivity(account);
         }
 
@@ -213,6 +221,7 @@ public class TestActivity extends AppCompatActivity
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
         intent.putExtra(TextKey3,Magnitud);
+        intent.putExtra(EmailKey,email);
         startActivity(intent);
     }
 
