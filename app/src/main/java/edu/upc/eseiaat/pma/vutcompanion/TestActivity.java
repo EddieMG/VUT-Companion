@@ -216,41 +216,41 @@ public class TestActivity extends AppCompatActivity
 
 
         READ(String.format(Data+Nom));
-        if (FET) {
-            Log.e("EDI","FET2");
-            readItemList(String.format(Data + Nom));
-            GraphView graph = (GraphView) findViewById(R.id.graph);
-            graph.addSeries(series);
-        }
+//        if (FET) {
+//            Log.e("EDI","FET2");
+//            readItemList(String.format(Data + Nom));
+//            GraphView graph = (GraphView) findViewById(R.id.graph);
+//            graph.addSeries(series);
+//        }
     }
-    private  void readItemList(final  String FILENAME) {
-        try {
-            Log.i("edd", "readItemList");
-            FileInputStream fis = openFileInput(FILENAME);
-            byte[] buffer = new byte[MAX_BYTES];
-            int nread = fis.read(buffer);
-            int i=0;
-            DataPoint[] values = new DataPoint[25];
-            if (nread > 0) {
-                String content = new String(buffer, 0, nread);
-                String[] lines = content.split("\n");
-                for (String line : lines) {
-                    String[] parts = line.split(";");
-                    String c = parts[0];
-                    String d = parts[1];
-                    DataPoint v = new DataPoint(Integer.parseInt(c), Integer.parseInt(d));
-                    values[i] = v;
-                    i++;
-                    if (parts[1].isEmpty()) {
-                        return;
-
-                    }
-                }
-            }
-            series = new LineGraphSeries<DataPoint>(values);
-        } catch (IOException e) {
-                Log.e("edd", "readItemList: IOException");
-        }}
+//    private  void readItemList(final  String FILENAME) {
+//        try {
+//            Log.i("edd", "readItemList");
+//            FileInputStream fis = openFileInput(FILENAME);
+//            byte[] buffer = new byte[MAX_BYTES];
+//            int nread = fis.read(buffer);
+//            int i=0;
+//            DataPoint[] values = new DataPoint[25];
+//            if (nread > 0) {
+//                String content = new String(buffer, 0, nread);
+//                String[] lines = content.split("\n");
+//                for (String line : lines) {
+//                    String[] parts = line.split(";");
+//                    String c = parts[0];
+//                    String d = parts[1];
+//                    DataPoint v = new DataPoint(Integer.parseInt(c), Integer.parseInt(d));
+//                    values[i] = v;
+//                    i++;
+//                    if (parts[1].isEmpty()) {
+//                        return;
+//
+//                    }
+//                }
+//            }
+//            series = new LineGraphSeries<DataPoint>(values);
+//        } catch (IOException e) {
+//                Log.e("edd", "readItemList: IOException");
+//        }}
 
     public void READ(final String FILENAME){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -264,17 +264,24 @@ public class TestActivity extends AppCompatActivity
                 JSONArray students = response.getJSONArray("students");
                 Log.i("EDI","Pas 2");
                 FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+                DataPoint[] values = new DataPoint[students.length()];
                 for (int i=0 ; i < students.length(); i++){
                     JSONObject data = students.getJSONObject(i);
+
                     Log.i("EDDI","Pas 3");
                     a=data.getInt("time_series");
                     b=data.getInt("thrust");
+                    DataPoint v = new DataPoint(a, b);
+                    values[i] = v;
                     String line = String.format("%s;%s\n", a, b);
                     fos.write(line.getBytes());
                 }
                 fos.close();
-               FET=true;
-                
+                series = new LineGraphSeries<DataPoint>(values);
+                GraphView graph = (GraphView) findViewById(R.id.graph);
+                graph.addSeries(series);
+//               FET=true;
+
                 Log.e("EDI","FET");
             } catch (JSONException e) {
                 e.printStackTrace();
