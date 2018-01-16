@@ -193,14 +193,14 @@ public class TestActivity extends AppCompatActivity
         final EditText editText = new EditText(context);
         final TextView text3=new TextView(context);
         final EditText editText2 = new EditText(context);
-        editText.setHint("Nom");
+        editText.setHint("Name");
         editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         layout.addView(text1,layoutParams);
 
         layout.addView(editText,layoutParams);
 
-        editText1.setHint("Data");
+        editText1.setHint("Date");
         editText1.setInputType(InputType.TYPE_CLASS_DATETIME);
 
         layout.addView(text2,layoutParams);
