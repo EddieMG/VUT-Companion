@@ -193,7 +193,7 @@ public class TestActivity extends AppCompatActivity
         layout.addView(editText3,layoutParams);
         alert.setTitle("Nova Entrada");
         alert.setView(layout);
-        alert.setPositiveButton("Introduir", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 Nom = editText2.getText().toString();
@@ -202,7 +202,7 @@ public class TestActivity extends AppCompatActivity
             }
         });
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.cancel();
             }

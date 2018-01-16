@@ -17,7 +17,7 @@
         android:layout_marginTop="185dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="acceptAccounts"
-        android:text="Accept accounts"
+        android:text="@string/Accepts_Accounts"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 
@@ -25,14 +25,13 @@
         android:id="@+id/eliminateButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_alignEnd="@+id/acceptButton"
+        android:layout_alignStart="@+id/acceptButton"
         android:layout_below="@+id/acceptButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="eliminateAccounts"
-        android:text="Eliminate accounts"
+        android:text="@string/Eliminate_Acounts"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 </android.widget.RelativeLayout>

@@ -101,7 +101,7 @@ public class MyAccountActivity extends AppCompatActivity
         layout.addView(editText1,layoutParams);
         alert.setTitle("Change password");
         alert.setView(layout);
-        alert.setPositiveButton("Introduce", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 password1 = editText.getText().toString();
@@ -117,7 +117,7 @@ public class MyAccountActivity extends AppCompatActivity
             }
         });
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.cancel();
             }

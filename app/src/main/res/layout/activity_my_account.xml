@@ -40,7 +40,7 @@
         android:layout_marginTop="100dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="setpassword"
-        android:text="Change password"
+        android:text="@string/Change_password"
         android:textColor="@color/colorText"
         android:textSize="20sp" />
 </android.widget.RelativeLayout>

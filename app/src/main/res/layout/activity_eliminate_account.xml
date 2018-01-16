@@ -28,7 +28,7 @@
             android:layout_marginRight="11dp"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="multipleEliminate"
-            android:text="Eliminate"
+            android:text="@string/Delete"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="20sp" />

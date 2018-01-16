@@ -35,7 +35,7 @@
             android:layout_marginRight="11dp"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="addgraph"
-            android:text="Add graph"
+            android:text="@string/Add_graph"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="17sp" />
