@@ -191,8 +191,7 @@ public class TestActivity extends AppCompatActivity
         final EditText editText1 = new EditText(context);
         final TextView text2=new TextView(context);
         final EditText editText = new EditText(context);
-        final TextView text3=new TextView(context);
-        final EditText editText2 = new EditText(context);
+
         editText.setHint("Name");
         editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
@@ -206,14 +205,10 @@ public class TestActivity extends AppCompatActivity
         layout.addView(text2,layoutParams);
         layout.addView(editText1,layoutParams);
 
-        layout.addView(text3,layoutParams);
-
-        layout.addView(editText2,layoutParams);
         alert.setTitle("Nova Entrada");
         alert.setView(layout);
         alert.setPositiveButton("Introduir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-
                 Nom = editText.getText().toString();
                 Data = editText1.getText().toString();
             }
@@ -234,8 +229,8 @@ public class TestActivity extends AppCompatActivity
 
     public void GoToResults(View view) {
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
-        intent.putExtra(TextKey,Nom);
-        intent.putExtra(TextKey2,Data);
+        intent.putExtra(TextKey,Data);
+        intent.putExtra(TextKey2,Nom);
         startActivity(intent);
     }
 
