@@ -28,7 +28,7 @@
             android:layout_marginRight="11dp"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="multipleAccept"
-            android:text="Accept"
+            android:text="@string/accept"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="20sp" />

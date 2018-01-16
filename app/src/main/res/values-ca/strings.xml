@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Venturi Unmaned Vehicles</string>
+    <string name="Accepts_Accounts">Aceptar comptes</string>
+    <string name="Admin">ADMIN</string>
+    <string name="Delete">Eliminar</string>
+    <string name="Eliminate_Acounts">Eliminar comptes</string>
+    <string name="Test">TEST</string>
+    <string name="my_account">EL MEU COMPTE</string>
+    <string name="results">RESULTATS</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contrasenya</string>
+    <string name="register">Registrar-se</string>
+    <string name="accept">Acceptar</string>
+    <string name="action_settings">Config</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="Change_password">Canviar contrasenya</string>
+    <string name="Add_graph">Afegir gràfic</string>
+    <string name="confirm">Confirmació</string>
+    <string name="Cancel">Cancel·lar</string>
+</resources>

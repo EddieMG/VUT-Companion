@@ -14,7 +14,7 @@
         android:layout_marginTop="85dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="gotoTest"
-        android:text="Test"
+        android:text="@string/Test"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 
@@ -29,7 +29,7 @@
         android:layout_toEndOf="@+id/myAccountButton"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="gotoMyAccount"
-        android:text="My Account"
+        android:text="@string/my_account"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="0dp"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="gotoResults"
-        android:text="Results"
+        android:text="@string/results"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 
@@ -55,7 +55,7 @@
         android:layout_toEndOf="@+id/ResultsButton"
         android:backgroundTint="@color/colorPrimary"
         android:onClick="gotoAdmin"
-        android:text="Admin"
+        android:text="@string/Admin"
         android:textColor="@color/colorText"
         android:textSize="17sp" />
 

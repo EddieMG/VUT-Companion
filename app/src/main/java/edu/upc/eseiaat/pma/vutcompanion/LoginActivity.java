@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if(jsonObject.names().get(0).equals("success")){
-                                Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),R.string.accept+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
                                 Intent account = new Intent(LoginActivity.this, HomeActivity.class);
                                 account.putExtra(TextKey,email.getText().toString());
                                 startActivity(account);
