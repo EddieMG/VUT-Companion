@@ -31,10 +31,10 @@
     <string name="erease">Erease</string>
 
     <string-array name="options">
-        <item>Thrust</item>
-        <item>Presure</item>
-        <item>Temperature</item>
-        <item>Wind</item>
+        <item>thrust</item>
+        <item>pressure</item>
+        <item>temperature</item>
+        <item>wind</item>
     </string-array>
     <string name="title_activity_nav_drawer_home">NavDrawerHomeActivity</string>
     <string name="title_activity_nav_drawer_test">NavDrawerTestActivity</string>
