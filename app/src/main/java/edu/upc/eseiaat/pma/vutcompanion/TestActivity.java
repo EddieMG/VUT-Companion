@@ -53,7 +53,7 @@ public class TestActivity extends AppCompatActivity
 
 
 
-    private static  boolean FET =false ;
+
     private AlertDialog.Builder alert;
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
@@ -66,7 +66,7 @@ public class TestActivity extends AppCompatActivity
     public int a;
     public int b;
     public LineGraphSeries<DataPoint> series;
-    private Button addPlot;
+
 
 
     @Override
@@ -79,7 +79,6 @@ public class TestActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_test);
 
-        addPlot = (Button) findViewById(R.id.addButton);
         popup();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,19 +106,17 @@ public class TestActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.nav_drawer_test, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         }
@@ -130,11 +127,11 @@ public class TestActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+
             Intent account = new Intent(TestActivity.this, HomeActivity.class);
             startActivity(account);
         } else if (id == R.id.test) {
@@ -170,15 +167,15 @@ public class TestActivity extends AppCompatActivity
         final TextView text1=new TextView(context);
         final EditText editText1 = new EditText(context);
         final TextView text2=new TextView(context);
-        final EditText editText = new EditText(context);
-        final TextView text3=new TextView(context);
         final EditText editText2 = new EditText(context);
-        editText.setHint("Nom");
-        editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        final TextView text3=new TextView(context);
+        final EditText editText3 = new EditText(context);
+        editText2.setHint("Nom");
+        editText2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         layout.addView(text1,layoutParams);
 
-        layout.addView(editText,layoutParams);
+        layout.addView(editText2,layoutParams);
 
         editText1.setHint("Data");
         editText1.setInputType(InputType.TYPE_CLASS_DATETIME);
@@ -186,20 +183,20 @@ public class TestActivity extends AppCompatActivity
         layout.addView(text2,layoutParams);
         layout.addView(editText1,layoutParams);
 
-        editText2.setHint("Magnitud");
-        editText2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        editText3.setHint("Magnitud");
+        editText3.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         layout.addView(text3,layoutParams);
 
-        layout.addView(editText2,layoutParams);
+        layout.addView(editText3,layoutParams);
         alert.setTitle("Nova Entrada");
         alert.setView(layout);
         alert.setPositiveButton("Introduir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                Nom = editText.getText().toString();
+                Nom = editText2.getText().toString();
                 Data = editText1.getText().toString();
-                Magnitud= editText2.getText().toString();
+                Magnitud= editText3.getText().toString();
             }
         });
 
@@ -212,10 +209,6 @@ public class TestActivity extends AppCompatActivity
         alert.show();
     }
 
-
-
-
-
     public void GoToResults(View view) {
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
@@ -225,26 +218,24 @@ public class TestActivity extends AppCompatActivity
     }
 
     public void addgraph(View view) {
-        Log.i("edd", "butó");
 
 
-        READ(String.format(Data+Nom+".txt"),Magnitud);
-//        READ("odos");
+        READ(Magnitud);
+
     }
 
 
-    public void READ(final String FILENAME, final String Magnitud){
+    public void READ( final String Magnitud){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        Log.i("EDDI","Pas 0");
+
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
-            Log.i("EDDI","Pas 1");
+
             try {
                 JSONArray students = response.getJSONArray("students");
-                Log.i("EDI","Pas 2");
-                FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+
                 DataPoint[] values = new DataPoint[students.length()];
                 for (int i=0 ; i < students.length(); i++){
                     JSONObject data = students.getJSONObject(i);
@@ -254,24 +245,18 @@ public class TestActivity extends AppCompatActivity
                     b=data.getInt(Magnitud);
                     DataPoint v = new DataPoint(a, b);
                     values[i] = v;
-                    String line = String.format("%s;%s\n", a, b);
-                    fos.write(line.getBytes());
+
                 }
-                fos.close();
+
                 series = new LineGraphSeries<DataPoint>(values);
                 GraphView graph = (GraphView) findViewById(R.id.graph);
                 graph.addSeries(series);
-//               FET=true;
+
 
                 Log.e("EDI","FET");
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.i("EDDI","exeption");
-             } catch (FileNotFoundException e) {
-            Log.e("Eddie", "writeItemList: FileNotFoundException");
-        } catch (IOException e) {
-            Log.e("Eddie", "writeItemList: IOException ");
-
         } catch (IndexOutOfBoundsException e) {
             Log.e("Eddie", "IndexOutOfBoundsException ");
         }

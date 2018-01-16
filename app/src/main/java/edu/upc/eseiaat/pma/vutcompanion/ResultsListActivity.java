@@ -42,7 +42,7 @@ public class ResultsListActivity extends AppCompatActivity
 
     private void writeItemList() {
         try {
-            Log.e("eddie","escriptura11");
+
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             for (int i = 0; i < contador; i++) {
 
@@ -52,10 +52,10 @@ public class ResultsListActivity extends AppCompatActivity
 
                 String line = String.format("%s;%s\n", title, date);
                 fos.write(line.getBytes());
-                Log.e("eddie","escriptura");
+
             }
 
-            fos.close(); // ... and close
+            fos.close();
 
         } catch (FileNotFoundException e) {
             Log.e("Eddie", "writeItemList: FileNotFoundException");
@@ -91,7 +91,7 @@ public class ResultsListActivity extends AppCompatActivity
                     datum2.put("date", date);
 
                     if (!title.isEmpty()) {
-                        Log.e("Eddie", "datum");
+
                         data.add(datum2);
                         adapter.notifyDataSetChanged();
                         contador++;
@@ -189,19 +189,17 @@ public class ResultsListActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.nav_drawer_results_list, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         }
@@ -212,11 +210,11 @@ public class ResultsListActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+
             Intent account = new Intent(ResultsListActivity.this, HomeActivity.class);
             startActivity(account);
 

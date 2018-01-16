@@ -127,17 +127,17 @@ public class MyAccountActivity extends AppCompatActivity
 
     private void changePassword(final String email) {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        Log.i("montravetix","Pas 0");
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("montravetix","Pas 1");
+
                 try {
                     JSONArray users = response.getJSONArray("users");
-                    Log.i("montravetix","Pas 2");
+
                     for (int i = 0; i < users.length(); i++){
                         JSONObject user = users.getJSONObject(i);
-                        Log.i("montravetix","Pas 3");
+
                         if (user.getString("email").equals(email)){
                             String id = user.getString("id");
                             change(id);
@@ -145,9 +145,9 @@ public class MyAccountActivity extends AppCompatActivity
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i("montravetix","exeptioooooon");
+
                 }
-                Log.i("montravetix","Pas 4");
+
 
             }
         }, new Response.ErrorListener() {

@@ -62,26 +62,26 @@ public class HomeActivity extends AppCompatActivity
 
     private void checkIfAdmin(final String email) {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        Log.i("montravetix","Pas 0");
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("montravetix","Pas 1");
+
                 try {
                     JSONArray users = response.getJSONArray("users");
-                    Log.i("montravetix","Pas 2");
+
                     for (int i = 0; i < users.length(); i++){
                         JSONObject user = users.getJSONObject(i);
-                        Log.i("montravetix","Pas 3");
+
                         if (user.getString("email").equals(email) && user.getString("admin").equals("1")){
                            isAdmin = true;
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i("montravetix","exeptioooooon");
+
                 }
-                Log.i("montravetix","Pas 4");
+
 
             }
         }, new Response.ErrorListener() {

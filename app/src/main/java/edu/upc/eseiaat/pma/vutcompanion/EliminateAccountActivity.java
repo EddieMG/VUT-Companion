@@ -35,7 +35,7 @@ public class EliminateAccountActivity extends AppCompatActivity {
     ArrayList<String> idList;
     String eliminateUrl = "http://192.168.1.40/manageAccounts/eliminateAccount.php";
     String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
-    // TODO: 15/1/2018 FALTA CREAR ELS PHP NECESSARIS PER A FER AQUESTA ACCIÓ
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +48,17 @@ public class EliminateAccountActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.list);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        Log.i("montravetix","Pas 0");
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrl, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("montravetix","Pas 1");
+
                 try {
                     JSONArray users = response.getJSONArray("users");
-                    Log.i("montravetix","Pas 2");
+
                     for (int i = 0; i < users.length(); i++){
                         JSONObject user = users.getJSONObject(i);
-                        Log.i("montravetix","Pas 3");
+
                         if (user.getString("accepted").equals("1")){
                             String email = user.getString("email");
                             accountList.add(new account(email, false));
@@ -69,9 +69,9 @@ public class EliminateAccountActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i("montravetix","exeptioooooon");
+
                 }
-                Log.i("montravetix","Pas 4");
+
 
             }
         }, new Response.ErrorListener() {
@@ -83,7 +83,7 @@ public class EliminateAccountActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
 
         if (!accountList.isEmpty()){
-            Log.i("montravetix","tenim material dins l'array...");
+
         }
 
         adapter = new accountAdapter(this, android.R.layout.simple_list_item_1, accountList);
