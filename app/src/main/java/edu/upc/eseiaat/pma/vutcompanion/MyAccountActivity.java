@@ -46,8 +46,8 @@ public class MyAccountActivity extends AppCompatActivity
     public static String  password2;
     private static String email;
     private TextView emailText;
-    String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
-    String passwordUrl = "http://192.168.1.40/manageAccounts/passwordChange.php";
+    String showUrl = "http://192.168.43.65/manageAccounts/showAccount.php";
+    String passwordUrl = "http://192.168.43.65/manageAccounts/passwordChange.php";
     RequestQueue requestQueue;
     public static String EmailKey = "EmailKey";
 
@@ -93,12 +93,12 @@ public class MyAccountActivity extends AppCompatActivity
         final EditText editText = new EditText(context);
 
         editText.setHint("Password");
-
+        editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         layout.addView(text1,layoutParams);
-
         layout.addView(editText,layoutParams);
 
         editText1.setHint("Confirm password");
+        editText1.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         layout.addView(text2,layoutParams);
         layout.addView(editText1,layoutParams);
         alert.setTitle("Change password");

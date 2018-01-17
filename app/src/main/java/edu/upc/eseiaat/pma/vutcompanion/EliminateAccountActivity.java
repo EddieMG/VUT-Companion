@@ -33,8 +33,8 @@ public class EliminateAccountActivity extends AppCompatActivity {
     ListView list;
     RequestQueue requestQueue;
     ArrayList<String> idList;
-    String eliminateUrl = "http://192.168.1.40/manageAccounts/eliminateAccount.php";
-    String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
+    String eliminateUrl = "http://192.168.43.65/manageAccounts/eliminateAccount.php";
+    String showUrl = "http://192.168.43.65/manageAccounts/showAccount.php";
 
     //Com hem fet en el cas de l'activitat per a acceptar usuaris, per a eliminar-los fem exactament
     //el mateix, primer cridem una funció que ens permet llegir de la base de dades tots els usuaris

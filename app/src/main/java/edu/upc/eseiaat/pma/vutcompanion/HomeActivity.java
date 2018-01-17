@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity
 
     private String email;
     private boolean isAdmin;
-    String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
+    String showUrl = "http://192.168.43.65/manageAccounts/showAccount.php";
     RequestQueue requestQueue;
     public static String EmailKey = "EmailKey";
 

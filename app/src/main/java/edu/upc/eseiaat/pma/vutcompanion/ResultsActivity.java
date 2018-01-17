@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class ResultsActivity extends AppCompatActivity {
 
     LineGraphSeries<DataPoint> series;
-    String showUrl ="http://192.168.1.40/test_data/showData.php";
+    String showUrl ="http://192.168.43.65/test_data/showData.php";
     public RequestQueue requestQueue;
     public int a;
     public int b;
@@ -38,7 +38,7 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        email = getIntent().getExtras().getString(EmailKey);
+        email = getIntent().getExtras().getString(HomeActivity.EmailKey);
 
         TextView title = (TextView) findViewById(R.id.resultTitle);
         TextView date = (TextView) findViewById(R.id.dateTextView);

@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email,password;
     private Button sign_in_register;
     private RequestQueue requestQueue;
-    private static final String URL = "http://192.168.1.40/login/user_control.php";
+    private static final String URL = "http://192.168.43.65/login/user_control.php";
     private StringRequest request;
     public static String EmailKey = "EmailKey";
 

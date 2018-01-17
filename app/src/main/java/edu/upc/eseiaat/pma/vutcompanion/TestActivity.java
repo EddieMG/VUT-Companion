@@ -16,11 +16,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -58,13 +62,16 @@ public class TestActivity extends AppCompatActivity
     public static String  Nom;
     public static String  Data;
     public static String  Magnitud;
-    String showUrl ="http://192.168.1.40/test_data/showData.php";
+    String showUrl ="http://192.168.43.65/test_data/showData.php";
     public RequestQueue requestQueue;
     public int a;
     public int b;
     public LineGraphSeries<DataPoint> series;
     public static String EmailKey = "EmailKey";
     private static String email;
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+    private String data_type;
 
 
 
@@ -81,6 +88,23 @@ public class TestActivity extends AppCompatActivity
         email = getIntent().getExtras().getString(HomeActivity.EmailKey);
 
         popup();
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+        adapter = ArrayAdapter.createFromResource(this,R.array.options,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                data_type = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i) + "", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -220,7 +244,7 @@ public class TestActivity extends AppCompatActivity
         Intent intent = new Intent(TestActivity.this, ResultsListActivity.class);
         intent.putExtra(TextKey,Data);
         intent.putExtra(TextKey2,Nom);
-        intent.putExtra(TextKey3,Magnitud);
+        intent.putExtra(TextKey3,data_type);
         intent.putExtra(EmailKey,email);
         startActivity(intent);
     }
@@ -228,12 +252,12 @@ public class TestActivity extends AppCompatActivity
     public void addgraph(View view) {
 
 
-        READ(Magnitud);
+        READ();
 
     }
 
 
-    public void READ( final String Magnitud){                       //Llegim del servidor les dades de l'experminent en funció de la magnitud que carreguem de la ResultsListActivity.
+    public void READ(){                       //Llegim del servidor les dades de l'experminent en funció de la magnitud que carreguem de la ResultsListActivity.
             requestQueue = Volley.newRequestQueue(getApplicationContext());
 
 
@@ -248,9 +272,8 @@ public class TestActivity extends AppCompatActivity
                 for (int i=0 ; i < students.length(); i++){
                     JSONObject data = students.getJSONObject(i);
 
-                 
                     a=data.getInt("time_series");
-                    b=data.getInt(Magnitud);                //Dins del for nem afegint als datapoints els valors de la taula del servidor
+                    b=data.getInt(data_type);                //Dins del for nem afegint als datapoints els valors de la taula del servidor
                     DataPoint v = new DataPoint(a, b);
                     values[i] = v;
 
@@ -259,7 +282,7 @@ public class TestActivity extends AppCompatActivity
                 series = new LineGraphSeries<DataPoint>(values);            //Creem la Linear Graph Series
                 GraphView graph = (GraphView) findViewById(R.id.graph);
                 graph.addSeries(series);                                     //Grafiquem la serie
-
+                spinner.setEnabled(false);
 
 
             } catch (JSONException e) {

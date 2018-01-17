@@ -37,8 +37,8 @@ public class AcceptAccountActivity extends AppCompatActivity {
     private accountAdapter adapter;
     ListView list;
     RequestQueue requestQueue;
-    String acceptUrl = "http://192.168.1.40/manageAccounts/acceptAccount.php";
-    String showUrl = "http://192.168.1.40/manageAccounts/showAccount.php";
+    String acceptUrl = "http://192.168.43.65/manageAccounts/acceptAccount.php";
+    String showUrl = "http://192.168.43.65/manageAccounts/showAccount.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

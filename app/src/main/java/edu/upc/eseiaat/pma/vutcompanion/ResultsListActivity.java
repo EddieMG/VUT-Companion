@@ -31,7 +31,7 @@ public class ResultsListActivity extends AppCompatActivity
     private SimpleAdapter adapter;
     public int  contador = 1;
     private static final int MAX_BYTES = 8000;
-    private static final  String FILENAME = "shoppinglist.txt";
+    private static final  String FILENAME = "list.txt";
     public static String  TextKey = "TextKey";
     public static String  TextKey2 = "TextKey2";
     public static String  TextKey3 = "TextKey3";
@@ -41,6 +41,7 @@ public class ResultsListActivity extends AppCompatActivity
     private boolean gotExtra;
     public static String EmailKey = "EmailKey";
     private static String email;
+    private String data_type;
 
     private void writeItemList() {                  //Llegim del fitxer on emmagatzememnt els experiments.
         try {
@@ -124,8 +125,6 @@ public class ResultsListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer_results_list);
 
-        email = getIntent().getExtras().getString(EmailKey);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -142,6 +141,7 @@ public class ResultsListActivity extends AppCompatActivity
             Data = getIntent().getExtras().getString(ResultsListActivity.TextKey);
             Nom = getIntent().getExtras().getString(ResultsListActivity.TextKey2);
             Magnitud = getIntent().getExtras().getString(ResultsListActivity.TextKey3);
+            email = getIntent().getExtras().getString(TestActivity.EmailKey);
             gotExtra=true;
         }catch (NullPointerException e){gotExtra=false;}
         list = (ListView)findViewById(R.id.list1);
